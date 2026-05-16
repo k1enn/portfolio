@@ -425,7 +425,6 @@
                 boxStyles.paddingLeft.length - 2));
 
             this.dimensions.WIDTH = this.outerContainerEl.offsetWidth - padding * 2;
-            this.dimensions.WIDTH = Math.min(DEFAULT_WIDTH, this.dimensions.WIDTH); //Arcade Mode
             if (this.activated) {
                 this.setArcadeModeContainerScale();
             }
