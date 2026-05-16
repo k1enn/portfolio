@@ -52,7 +52,6 @@ export default function Technology() {
           margin-top: 2rem;
           border: 2px solid var(--border);
           background: var(--bg);
-          box-shadow: var(--shadow-brutal);
         }
         .tech-grid {
           display: grid;

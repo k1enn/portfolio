@@ -86,7 +86,6 @@ export default function Header() {
           max-width: 360px;
           border: 2px solid var(--border);
           background: var(--bg);
-          box-shadow: var(--shadow-brutal);
           padding: 14px 16px;
         }
         .hero-progress-row {
