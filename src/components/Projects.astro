@@ -4,6 +4,8 @@ import ProjectCard from "./ProjectCard.astro";
 import projectsData from "../data/projects.json";
 
 const totalCount = projectsData.length;
+const initialCount = 4;
+const hasMore = totalCount > initialCount;
 ---
 
 <section id="projects" aria-labelledby="projects-heading" class="projects-section">
@@ -20,11 +22,57 @@ const totalCount = projectsData.length;
       </span>
     </div>
 
-    <div class="projects-grid">
-      {projectsData.map((project, i) => <ProjectCard project={project} index={i} />)}
+    <div id="projects-grid" class="projects-grid" data-projects-grid data-initial-count={initialCount}>
+      {projectsData.map((project, i) => (
+        <div class="project-card-wrap" data-hidden={i >= initialCount ? "true" : "false"}>
+          <ProjectCard project={project} index={i} />
+        </div>
+      ))}
     </div>
+
+    {hasMore && (
+      <div class="projects-actions">
+        <button
+          type="button"
+          class="load-more-btn"
+          data-load-more
+          aria-expanded="false"
+          aria-controls="projects-grid"
+        >
+          <span data-label-more>Load More ({totalCount - initialCount})</span>
+          <span data-label-less hidden>Show Less</span>
+        </button>
+      </div>
+    )}
   </div>
 </section>
+
+<script>
+  const grid = document.querySelector<HTMLElement>("[data-projects-grid]");
+  const btn = document.querySelector<HTMLButtonElement>("[data-load-more]");
+  if (grid && btn) {
+    const labelMore = btn.querySelector<HTMLElement>("[data-label-more]");
+    const labelLess = btn.querySelector<HTMLElement>("[data-label-less]");
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      const next = !expanded;
+      btn.setAttribute("aria-expanded", String(next));
+      grid.querySelectorAll<HTMLElement>(".project-card-wrap[data-hidden]").forEach((el) => {
+        if (next) el.dataset.hidden = "false";
+        else {
+          const idx = Array.from(el.parentElement!.children).indexOf(el);
+          const initial = Number(grid.dataset.initialCount || 4);
+          el.dataset.hidden = idx >= initial ? "true" : "false";
+        }
+      });
+      labelMore?.toggleAttribute("hidden", next);
+      labelLess?.toggleAttribute("hidden", !next);
+      if (!next) {
+        document.getElementById("projects")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+</script>
 
 <style>
   .projects-section {
@@ -60,6 +108,33 @@ const totalCount = projectsData.length;
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+  .project-card-wrap[data-hidden="true"] {
+    display: none;
+  }
+  .projects-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+  .load-more-btn {
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 14px 28px;
+    background: var(--bg);
+    color: var(--fg);
+    border: 2px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .load-more-btn:hover,
+  .load-more-btn:focus-visible {
+    background: var(--fg);
+    color: var(--bg);
+    outline: none;
   }
   @media (min-width: 768px) {
     .projects-section { padding-top: 6rem; padding-bottom: 6rem; }
