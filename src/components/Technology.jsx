@@ -135,7 +135,7 @@ export default function Technology() {
           font-size: 0.9rem;
         }
         .tech-head-count {
-          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          font-family: var(--font-display);
           font-size: 0.95rem;
           font-weight: 700;
         }
