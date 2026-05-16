@@ -69,12 +69,41 @@ export default function Technology() {
                 if (!tech) {
                   return <div key={`pad-${i}`} className="tech-cell tech-cell--empty" aria-hidden="true" />;
                 }
-                const Icon = ICONS[tech.icon];
+                const Tag = tech.link ? "a" : "div";
+                const tagProps = tech.link
+                  ? {
+                      href: tech.link,
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      "aria-label": tech.name,
+                    }
+                  : {};
+                const inner = tech.icon === "IconifyElysia" ? (
+                  <>
+                    <img
+                      className="tech-icon tech-icon--img tech-elysia-light"
+                      src="https://api.iconify.design/skill-icons:elysia-light.svg"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <img
+                      className="tech-icon tech-icon--img tech-elysia-dark"
+                      src="https://api.iconify.design/skill-icons:elysia-dark.svg"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                  </>
+                ) : (
+                  (() => {
+                    const Icon = ICONS[tech.icon];
+                    return Icon ? <Icon className="tech-icon" aria-hidden="true" /> : null;
+                  })()
+                );
                 return (
-                  <div key={`${cat.label}-${tech.name}`} className="tech-cell">
-                    {Icon ? <Icon className="tech-icon" aria-hidden="true" /> : null}
+                  <Tag key={`${cat.label}-${tech.name}`} className="tech-cell" {...tagProps}>
+                    {inner}
                     <span className="tech-name">{tech.name}</span>
-                  </div>
+                  </Tag>
                 );
               })}
             </div>
@@ -125,12 +154,26 @@ export default function Technology() {
           min-height: 112px;
           background: var(--bg);
           color: var(--fg);
+          text-decoration: none;
+          transition: background 0.15s ease, color 0.15s ease;
         }
+        a.tech-cell { cursor: pointer; }
+        a.tech-cell:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; }
         .tech-cell:not(.tech-cell--empty):hover {
           background: var(--fg);
           color: var(--bg);
         }
         .tech-icon { font-size: 30px; margin-bottom: 10px; }
+        .tech-icon--img { width: 30px; height: 30px; object-fit: contain; display: block; }
+        .tech-elysia-dark { display: none; }
+        @media (prefers-color-scheme: dark) {
+          :root:not([data-theme="light"]) .tech-elysia-light { display: none; }
+          :root:not([data-theme="light"]) .tech-elysia-dark { display: block; }
+        }
+        :root[data-theme="dark"] .tech-elysia-light { display: none; }
+        :root[data-theme="dark"] .tech-elysia-dark { display: block; }
+        :root[data-theme="light"] .tech-elysia-light { display: block; }
+        :root[data-theme="light"] .tech-elysia-dark { display: none; }
         .tech-name {
           font-size: 0.76rem;
           font-weight: 500;
@@ -143,6 +186,7 @@ export default function Technology() {
           .tech-grid { grid-template-columns: repeat(4, 1fr); }
           .tech-cell { min-height: 128px; padding: 26px 14px; }
           .tech-icon { font-size: 38px; }
+          .tech-icon--img { width: 38px; height: 38px; }
           .tech-head { padding: 12px 18px; }
           .tech-head-label { font-size: 1rem; }
           .tech-head-count { font-size: 1.05rem; }
