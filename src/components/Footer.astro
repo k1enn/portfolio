@@ -21,6 +21,13 @@
     Runner.prototype.loadSounds = function () { this.audioContext = null; };
     Runner.prototype.setArcadeMode = function () {};
     Runner.prototype.setArcadeModeContainerScale = function () {};
+
+    var scrollKeys = { 32: 1, 33: 1, 34: 1, 38: 1, 40: 1 };
+    window.addEventListener("keydown", function (e) {
+      var inst = Runner.instance_;
+      if (!inst || !inst.activated || inst.crashed) return;
+      if (scrollKeys[e.keyCode]) e.preventDefault();
+    }, { capture: true, passive: false });
   })();
 </script>
 
