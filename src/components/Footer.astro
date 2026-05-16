@@ -121,6 +121,11 @@ const currentYear = new Date().getFullYear();
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .runner-canvas { filter: invert(1); }
   }
+  body.inverted .runner-canvas { filter: invert(1); }
+  :root[data-theme="dark"] body.inverted .runner-canvas { filter: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body.inverted .runner-canvas { filter: none; }
+  }
   .interstitial-wrapper .controller {
     position: absolute;
     top: 0;
