@@ -366,6 +366,7 @@
                 this.dimensions.HEIGHT, Runner.classes.PLAYER);
 
             this.canvasCtx = this.canvas.getContext('2d');
+            this.canvasCtx.imageSmoothingEnabled = false;
             Runner.updateCanvasScaling(this.canvas);
 
             // Horizon contains clouds, obstacles and the ground.
@@ -927,6 +928,7 @@
      */
     Runner.updateCanvasScaling = function (canvas, opt_width, opt_height) {
         var context = canvas.getContext('2d');
+        context.imageSmoothingEnabled = false;
 
         // Query the various pixel ratios
         var devicePixelRatio = Math.floor(window.devicePixelRatio) || 1;

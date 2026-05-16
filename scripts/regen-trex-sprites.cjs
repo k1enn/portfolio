@@ -16,7 +16,7 @@ async function recolor(inputPath, outputPath) {
     const r = data[i], g = data[i + 1], b = data[i + 2];
     const lum = (r * 0.299 + g * 0.587 + b * 0.114) | 0;
 
-    data[i] = 0; data[i + 1] = 0; data[i + 2] = 0;
+    data[i] = 0x1a; data[i + 1] = 0x1a; data[i + 2] = 0x1a;
     if (lum >= LUM_THRESHOLD) {
       data[i + 3] = 0;
       bg++;
