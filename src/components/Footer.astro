@@ -13,21 +13,48 @@
   <img id="offline-resources-2x" src="/trex/sprite-2x.png" alt="" hidden aria-hidden="true" />
 </footer>
 
-<script is:inline src="/trex/trex.js"></script>
-
 <script is:inline>
   (function () {
-    if (typeof Runner === "undefined") return;
-    Runner.prototype.loadSounds = function () { this.audioContext = null; };
-    Runner.prototype.setArcadeMode = function () {};
-    Runner.prototype.setArcadeModeContainerScale = function () {};
-
-    var scrollKeys = { 32: 1, 33: 1, 34: 1, 38: 1, 40: 1 };
-    window.addEventListener("keydown", function (e) {
-      var inst = Runner.instance_;
-      if (!inst || !inst.activated || inst.crashed) return;
-      if (scrollKeys[e.keyCode]) e.preventDefault();
-    }, { capture: true, passive: false });
+    var wrap = document.querySelector(".footer-game-wrap");
+    if (!wrap) return;
+    var loaded = false;
+    var load = function () {
+      if (loaded) return;
+      loaded = true;
+      var s = document.createElement("script");
+      s.src = "/trex/trex.js";
+      s.async = true;
+      s.onload = function () {
+        if (typeof Runner === "undefined") return;
+        Runner.prototype.loadSounds = function () { this.audioContext = null; };
+        Runner.prototype.setArcadeMode = function () {};
+        Runner.prototype.setArcadeModeContainerScale = function () {};
+        var scrollKeys = { 32: 1, 33: 1, 34: 1, 38: 1, 40: 1 };
+        window.addEventListener("keydown", function (e) {
+          var inst = Runner.instance_;
+          if (!inst || !inst.activated || inst.crashed) return;
+          if (scrollKeys[e.keyCode]) e.preventDefault();
+        }, { capture: true, passive: false });
+        if (document.readyState !== "loading") {
+          new Runner(".interstitial-wrapper");
+        }
+      };
+      document.head.appendChild(s);
+    };
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            load();
+            io.disconnect();
+            break;
+          }
+        }
+      }, { rootMargin: "200px" });
+      io.observe(wrap);
+    } else {
+      window.addEventListener("load", load);
+    }
   })();
 </script>
 
