@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.jsx";
+import Navbar from "../components/Navbar.astro";
 import Header from "../components/Header.jsx";
 import Technology from "../components/Technology.jsx";
 import SectionHeading from "../components/SectionHeading.astro";
@@ -10,7 +10,7 @@ import Footer from "../components/Footer.astro";
 ---
 
 <Layout>
-  <Navbar client:load />
+  <Navbar />
   <main>
     <Header />
 

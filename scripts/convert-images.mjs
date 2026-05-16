@@ -3,7 +3,7 @@ import { join, parse } from "node:path";
 import sharp from "sharp";
 
 const DIR = new URL("../public/images/", import.meta.url).pathname;
-const WIDTHS = [480, 800, 1280];
+const WIDTHS = [400, 800, 1280];
 const QUALITY = 78;
 
 const files = await readdir(DIR);

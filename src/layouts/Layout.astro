@@ -18,7 +18,7 @@ const {
   keywords = "hire full stack developer Vietnam, Vietnamese full stack developer, full-stack developer Vietnam, Next.js developer Vietnam, React developer Vietnam, Node.js developer, NestJS developer, Java developer, .NET developer, Flutter developer, Trung Kien, Dinh Trung Kien, k1en, k1enn, junior full stack developer, freelance developer Vietnam, software engineer hire, remote developer Vietnam, ReactJS, NextJS, Astro, PostgreSQL, MongoDB, AWS, Cloudflare, NestJS, ExpressJS, ElysiaJS, DrizzleORM, TypeScript, JavaScript, portfolio",
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, SITE_URL).toString();
+const canonical = Astro.url.pathname === "/" ? SITE_URL : new URL(Astro.url.pathname, SITE_URL).toString();
 
 const personSchema = {
   "@context": "https://schema.org",

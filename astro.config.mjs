@@ -6,6 +6,9 @@ export default defineConfig({
   integrations: [react()],
   devToolbar: { enabled: false },
   server: { host: true, port: 4321 },
+  build: {
+    inlineStylesheets: "always",
+  },
   vite: {
     ssr: {
       noExternal: ["react-icons"],

@@ -84,6 +84,10 @@
 }
 .theme-toggle:hover { background: var(--fg); color: var(--bg); }
 .theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle [data-theme-icon] { display: none; }
+:root:not([data-theme]) .theme-toggle [data-theme-icon="system"] { display: block; }
+:root[data-theme="light"] .theme-toggle [data-theme-icon="light"] { display: block; }
+:root[data-theme="dark"] .theme-toggle [data-theme-icon="dark"] { display: block; }
 
 .menu-icon {
   display: none;

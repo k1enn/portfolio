@@ -19,13 +19,13 @@ export interface Props {
 const { project, index = 0 } = Astro.props;
 const number = String(index + 1).padStart(2, "0");
 
-const buildSrcset = (src: string) => {
-  if (!src.startsWith("/images/") || !src.endsWith(".webp")) return undefined;
-  const base = src.slice(0, -".webp".length);
-  return `${base}-480w.webp 480w, ${base}-800w.webp 800w, ${src} 1280w`;
-};
-const srcset = buildSrcset(project.image);
-const sizes = srcset ? "(min-width: 768px) 50vw, 100vw" : undefined;
+const isVariant = project.image.startsWith("/images/") && project.image.endsWith(".webp");
+const base = isVariant ? project.image.slice(0, -".webp".length) : "";
+const srcset = isVariant
+  ? `${base}-400w.webp 400w, ${base}-800w.webp 800w, ${project.image} 1280w`
+  : undefined;
+const sizes = srcset ? "(min-width: 768px) 50vw, 200px" : undefined;
+const displaySrc = isVariant ? `${base}-400w.webp` : project.image;
 ---
 
 <a
@@ -39,14 +39,14 @@ const sizes = srcset ? "(min-width: 768px) 50vw, 100vw" : undefined;
     <div class="project-thumb-wrap">
       <img
         class="project-thumb"
-        src={project.image}
+        src={displaySrc}
         srcset={srcset}
         sizes={sizes}
         alt={project.title ? `${project.title} preview` : ""}
         loading="lazy"
         decoding="async"
-        width="1280"
-        height="720"
+        width="400"
+        height="225"
       />
       <span class="project-meta">{number}</span>
     </div>
