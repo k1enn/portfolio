@@ -1,22 +1,29 @@
 [
   {
+    "title": "human-resource-management",
+    "description": "A human resource management system built with Next.js, featuring employee management, attendance tracking, and performance evaluation functionalities.",
+    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/hrm.png?raw=true",
+    "link": "https://www.ctld.site/",
+    "tags": ["NextJS", "DrizzleORM", "ElysiaJS", "Cloudflare", "CI/CD"]
+  },
+  {
     "title": "QuanLyDesignerCTLD",
     "description": "My first actual project, which I built for my company to manage clothing templates. It allows users to create, edit, and organize clothing templates with a user-friendly interface.",
-    "image": "https://raw.githubusercontent.com/k1enn/k1enn/refs/heads/main/portfolio-react/public/images/quan-ly-designer.png",
+    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/quan-ly-designer.png?raw=true",
     "link": "https://quan-ly-designer-ctld-frontend-etb.pages.dev/",
-    "tags": ["Tool", "Frontend", "Responsive", "Native JS"]
+    "tags": ["Frontend", "Responsive", "Javascript"]
   },
   {
     "title": "QuanLySellerCTLD",
     "description": "As team leader with four fresher developers, I built this project to help the company manage its money flow. It allows users to track and manage financial transactions, generate reports, and gain insights into the company's financial health.",
-    "image": "https://raw.githubusercontent.com/k1enn/k1enn/refs/heads/main/portfolio-react/public/images/quan-ly-seller.png",
+    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/quan-ly-seller.png?raw=true",
     "link": "https://quan-ly-seller-ctld-frontend.pages.dev",
     "tags": ["NextJS", "Cloudflare", "CI/CD", "Team Work"]
   },
   {
     "title": "Hilu Learn",
     "description": "Prototype of blockchain e-learning platform featuring course management, quizzes, XP/leveling system, project collaboration, and real-time leaderboards. Built with Next.js 15 and Supabase.",
-    "image": "https://raw.githubusercontent.com/k1enn/k1enn/refs/heads/main/portfolio-react/public/images/hilu.png",
+    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/hilu.png?raw=true",
     "link": "https://hilu-learn-agy.pages.dev/",
     "tags": ["NTF", "Blockchain", "Solana", "NextJS", "Supabase"]
   },
@@ -30,16 +37,16 @@
   {
     "title": "elsa-speak-clone",
     "description": "A comprehensive Android application designed to help users learn English through interactive lessons, pronunciation practice, quizzes, and more.",
-    "image": "https://raw.githubusercontent.com/k1enn/k1enn/main/Portfolio/images/elsa-speak-clone.png",
+    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/elsa-speak-clone.png?raw=true",
     "link": "https://github.com/k1enn/elsa-speak-clone",
     "tags": ["Mobile", "Android", "Education", "AI Agent"]
   },
   {
     "title": "barbie-thrift-tool",
     "description": "A responsive tool for documenting apparel details with dynamic output generation.",
-    "image": "https://raw.githubusercontent.com/k1enn/k1enn/main/Portfolio/images/barbie-thrift-tools.png",
+    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/barbie-thrift-tools.png?raw=true",
     "link": "https://github.com/k1enn/Outfit-Template-Maker",
-    "tags": ["Tool", "Frontend", "Responsive", "Native JS"]
+    "tags": ["Tool", "Frontend", "Responsive", "Javascript"]
   },
   {
     "title": "software-engineer-notes",
