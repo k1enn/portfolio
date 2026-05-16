@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://k1en.me/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://k1en.me/images/hilu.png</image:loc>
+      <image:title>Hilu Learn - Web3 Learning Platform</image:title>
+      <image:caption>Hire Trung Kien — Full-Stack Developer from Vietnam (Next.js, React, Node.js, NestJS, Java, .NET).</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://k1en.me/images/quan-ly-designer.png</image:loc>
+      <image:title>QuanLyDesignerCTLD — Clothing template manager</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://k1en.me/images/quan-ly-seller.png</image:loc>
+      <image:title>QuanLySellerCTLD — Money flow management</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://k1en.me/images/elsa-speak-clone.png</image:loc>
+      <image:title>elsa-speak-clone — Android English learning app</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://k1en.me/images/barbie-thrift-tools.png</image:loc>
+      <image:title>barbie-thrift-tool — Apparel documentation tool</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://k1en.me/images/software-engineer-note.png</image:loc>
+      <image:title>software-engineer-notes</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://k1en.me/images/web_1.png</image:loc>
+      <image:title>BoysCoffee — Beverage ordering web app</image:title>
+    </image:image>
+  </url>
+</urlset>

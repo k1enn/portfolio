@@ -12,14 +12,14 @@ import Footer from "../components/Footer.astro";
 <Layout>
   <Navbar client:load />
   <main>
-    <Header client:load />
+    <Header />
 
     <Projects />
 
     <section id="tech" aria-labelledby="tech-heading" class="tech-section">
       <div class="container">
         <SectionHeading id="tech-heading" index={2}>Tech</SectionHeading>
-        <Technology client:load />
+        <Technology />
       </div>
     </section>
 

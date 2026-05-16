@@ -2,63 +2,63 @@
   {
     "title": "human-resource-management",
     "description": "A human resource management system built with Next.js, featuring employee management, attendance tracking, and performance evaluation functionalities.",
-    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/hrm.png?raw=true",
+    "image": "/images/hrm.webp",
     "link": "https://www.ctld.site/",
     "tags": ["NextJS", "DrizzleORM", "ElysiaJS", "Cloudflare", "CI/CD"]
   },
   {
     "title": "QuanLyDesignerCTLD",
     "description": "My first actual project, which I built for my company to manage clothing templates. It allows users to create, edit, and organize clothing templates with a user-friendly interface.",
-    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/quan-ly-designer.png?raw=true",
+    "image": "/images/quan-ly-designer.webp",
     "link": "https://quan-ly-designer-ctld-frontend-etb.pages.dev/",
     "tags": ["Frontend", "Responsive", "Javascript"]
   },
   {
     "title": "QuanLySellerCTLD",
     "description": "As team leader with four fresher developers, I built this project to help the company manage its money flow. It allows users to track and manage financial transactions, generate reports, and gain insights into the company's financial health.",
-    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/quan-ly-seller.png?raw=true",
+    "image": "/images/quan-ly-seller.webp",
     "link": "https://quan-ly-seller-ctld-frontend.pages.dev",
     "tags": ["NextJS", "Cloudflare", "CI/CD", "Team Work"]
   },
   {
     "title": "Hilu Learn",
     "description": "Prototype of blockchain e-learning platform featuring course management, quizzes, XP/leveling system, project collaboration, and real-time leaderboards. Built with Next.js 15 and Supabase.",
-    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/hilu.png?raw=true",
+    "image": "/images/hilu.webp",
     "link": "https://hilu-learn-agy.pages.dev/",
     "tags": ["NTF", "Blockchain", "Solana", "NextJS", "Supabase"]
   },
   {
     "title": "levents_shop",
     "description": "A full-stack e-commerce application built with MongoDB, Express.js, React.js, and Node.js featuring comprehensive admin functionality and order management.",
-    "image": "https://github.com/k1enn/levents_shop/raw/master/frontend/public/images/user_view.png",
+    "image": "/images/levents-user-view.webp",
     "link": "https://github.com/k1enn/levents_shop",
     "tags": ["Fullstack", "E-Commerce"]
   },
   {
     "title": "elsa-speak-clone",
     "description": "A comprehensive Android application designed to help users learn English through interactive lessons, pronunciation practice, quizzes, and more.",
-    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/elsa-speak-clone.png?raw=true",
+    "image": "/images/elsa-speak-clone.webp",
     "link": "https://github.com/k1enn/elsa-speak-clone",
     "tags": ["Mobile", "Android", "Education", "AI Agent"]
   },
   {
     "title": "barbie-thrift-tool",
     "description": "A responsive tool for documenting apparel details with dynamic output generation.",
-    "image": "https://github.com/k1enn/k1enn/blob/main/public/images/barbie-thrift-tools.png?raw=true",
+    "image": "/images/barbie-thrift-tools.webp",
     "link": "https://github.com/k1enn/Outfit-Template-Maker",
     "tags": ["Tool", "Frontend", "Responsive", "Javascript"]
   },
   {
     "title": "software-engineer-notes",
     "description": "Sharing notes for CS major.",
-    "image": "/images/software-engineer-note.png",
+    "image": "/images/software-engineer-note.webp",
     "link": "https://github.com/k1enn/software-engineer-notes",
     "tags": ["Documentation", "Educational", "CS"]
   },
   {
     "title": "BoysCoffee",
     "description": "A web application for browsing, selecting, and ordering beverages from anywhere.",
-    "image": "/images/web_1.png",
+    "image": "/images/web_1.webp",
     "link": "https://github.com/k1enn/Ca-Phe-Boys",
     "tags": ["Web App", "E-Commerce", "Fullstack"]
   }

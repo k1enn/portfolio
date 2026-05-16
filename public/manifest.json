@@ -1,24 +1,19 @@
 {
   "short_name": "k1en",
-  "name": "Trung Kien Portfolio",
+  "name": "Trung Kien — Full-Stack Developer Portfolio",
+  "description": "Hire Trung Kien (k1en) — full-stack developer from Vietnam. Next.js, React, Node.js, NestJS, Java, .NET, Flutter, PostgreSQL, MongoDB, AWS, Cloudflare. Open to hire.",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["portfolio", "developer", "software", "engineering", "business"],
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

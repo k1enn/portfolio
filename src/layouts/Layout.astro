@@ -5,12 +5,111 @@ import "../styles/navbar.css";
 export interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  keywords?: string;
 }
 
+const SITE_URL = "https://k1en.me";
+
 const {
-  title = "Trung Kien — Portfolio",
-  description = "Trung Kien (k1en) — back-end developer from Vietnam. Projects, stack, contact.",
+  title = "Hire Trung Kien — Full-Stack Developer (Next.js, React, Node.js, NestJS, Java, .NET) | Vietnam",
+  description = "Trung Kien (k1en) — full-stack developer from Vietnam available for hire. Next.js, React, Node.js, NestJS, Express, Java, .NET, Flutter, PostgreSQL, MongoDB, AWS, Cloudflare. Open to junior, full-time, freelance, and remote roles. View projects, tech stack, and contact.",
+  image = `${SITE_URL}/images/hilu.png`,
+  keywords = "hire full stack developer Vietnam, Vietnamese full stack developer, full-stack developer Vietnam, Next.js developer Vietnam, React developer Vietnam, Node.js developer, NestJS developer, Java developer, .NET developer, Flutter developer, Trung Kien, Dinh Trung Kien, k1en, k1enn, junior full stack developer, freelance developer Vietnam, software engineer hire, remote developer Vietnam, ReactJS, NextJS, Astro, PostgreSQL, MongoDB, AWS, Cloudflare, NestJS, ExpressJS, ElysiaJS, DrizzleORM, TypeScript, JavaScript, portfolio",
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE_URL).toString();
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Trung Kien",
+  "alternateName": ["Dinh Trung Kien", "k1en", "k1enn"],
+  "givenName": "Trung Kien",
+  "familyName": "Dinh",
+  "url": SITE_URL,
+  "image": image,
+  "jobTitle": "Full-Stack Developer",
+  "description": "Full-stack developer from Vietnam building web and server-side systems with Next.js, React, Node.js, NestJS, Java, .NET, and Flutter. Open to hire.",
+  "nationality": { "@type": "Country", "name": "Vietnam" },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "VN",
+    "addressRegion": "Vietnam",
+  },
+  "seeks": {
+    "@type": "Demand",
+    "name": "Software engineering role (full-stack, front-end, back-end, internship, freelance, remote)",
+  },
+  "knowsAbout": [
+    "Full-Stack Development",
+    "Front-End Development",
+    "Back-End Development",
+    "Next.js",
+    "React",
+    "Astro",
+    "Flutter",
+    "Node.js",
+    "NestJS",
+    "Express.js",
+    "ElysiaJS",
+    "HonoJS",
+    "Java",
+    ".NET",
+    ".NET Core",
+    "TypeScript",
+    "JavaScript",
+    "PostgreSQL",
+    "MongoDB",
+    "SQL Server",
+    "SQLite",
+    "DrizzleORM",
+    "AWS",
+    "Cloudflare",
+    "Firebase",
+    "REST APIs",
+    "CI/CD",
+    "System Design",
+  ],
+  "knowsLanguage": [
+    { "@type": "Language", "name": "Vietnamese" },
+    { "@type": "Language", "name": "English" },
+  ],
+  "sameAs": [
+    "https://github.com/k1enn",
+    "https://linkedin.com/in/k1enn",
+    "https://www.youtube.com/@iamk1en",
+    "https://codeforces.com/profile/dinhtrungkien",
+  ],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "University (Computer Science, expected 2027)",
+    "address": { "@type": "PostalAddress", "addressCountry": "VN" },
+  },
+  "workLocation": {
+    "@type": "Place",
+    "name": "Vietnam (remote-friendly)",
+  },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Trung Kien — Portfolio",
+  "url": SITE_URL,
+  "author": { "@type": "Person", "name": "Trung Kien" },
+  "inLanguage": "en",
+  "description": description,
+};
+
+const profilePageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "url": canonical,
+  "name": title,
+  "description": description,
+  "mainEntity": { "@type": "Person", "name": "Trung Kien", "url": SITE_URL },
+};
 ---
 
 <!DOCTYPE html>
@@ -20,25 +119,59 @@ const {
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
+
+    <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Trung Kien (Dinh Trung Kien)" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Trung Kien Portfolio" />
+    <meta name="geo.region" content="VN" />
+    <meta name="geo.country" content="Vietnam" />
+    <meta name="language" content="English" />
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Trung Kien — Portfolio" />
+    <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content="https://k1en.site" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Trung Kien Portfolio" />
-    <meta name="twitter:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content="Trung Kien — Full-Stack Developer Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="profile:first_name" content="Trung Kien" />
+    <meta property="profile:last_name" content="Dinh" />
+    <meta property="profile:username" content="k1enn" />
 
-    <link rel="apple-touch-icon" href="/logo192.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content="Trung Kien — Full-Stack Developer Portfolio" />
+
+    <link rel="apple-touch-icon" href="/favicon.ico" />
     <link rel="manifest" href="/manifest.json" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="me" href="https://github.com/k1enn" />
+    <link rel="me" href="https://linkedin.com/in/k1enn" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="stylesheet"
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+      />
+    </noscript>
 
     <script is:inline>
       (function () {
@@ -51,7 +184,9 @@ const {
       })();
     </script>
 
-    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(profilePageSchema)} />
   </head>
   <body>
     <a href="#home" class="skip-link">Skip to content</a>

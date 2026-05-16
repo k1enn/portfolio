@@ -32,7 +32,7 @@ export default function Header() {
             <span>Road to Graduation</span>
             <span>{progress.toFixed(0)}%</span>
           </div>
-          <div className="hero-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={Math.round(progress)}>
+          <div className="hero-bar" role="progressbar" aria-label="Road to graduation progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow={Math.round(progress)}>
             <div className="hero-bar-fill" style={{ width: `${progress}%` }} />
           </div>
           <div className="hero-progress-row hero-progress-meta">

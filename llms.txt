@@ -4,8 +4,7 @@
 
 ## Routes
 
-- [Home](https://k1en.me/): Hero, tech carousel, connect, featured projects, footer
-- [Projects](https://k1en.me/projects): Full project grid
+- [Home](https://k1en.me/): Hero, tech carousel, connect, featured projects, footer, trex offline
 
 ## Source
 
@@ -24,4 +23,4 @@
 ## Optional
 
 - [Astro Config](https://github.com/k1enn/portfolio/blob/main/astro.config.mjs): Build config
-- [Deploy](https://k1en.site): GitHub Pages mirror via `public/CNAME`
+- [Deploy](https://k1en.me): Cloudflare Pages
