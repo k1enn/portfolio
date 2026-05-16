@@ -7,12 +7,10 @@
   display: flex;
   align-items: center;
   z-index: 999;
-  background: #FFFFFF;
-  border-bottom: 2px solid #000000;
+  background: var(--bg);
+  border-bottom: 2px solid var(--border);
   box-sizing: border-box;
-  transition: box-shadow 0.15s ease-out;
 }
-.navbar.scrolled { box-shadow: 0 4px 0 0 #000000; }
 
 .navbar-container {
   width: 100%;
@@ -22,23 +20,28 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
+  gap: 16px;
   box-sizing: border-box;
 }
 
 .navbar-logo {
-  font-family: 'Archivo Black', 'Space Grotesk', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 900;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
   letter-spacing: -0.04em;
   text-decoration: none;
-  color: #000000;
-  text-transform: uppercase;
+  color: var(--fg);
   padding: 6px 10px;
-  border: 2px solid #000000;
-  background: #FFFFFF;
-  transition: all 0.12s ease-out;
+  border: 2px solid var(--border);
+  background: var(--bg);
 }
-.navbar-logo:hover { background: #000000; color: #FFFFFF; }
+.navbar-logo:hover { background: var(--fg); color: var(--bg); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 .nav-menu {
   display: flex;
@@ -51,55 +54,62 @@
 .nav-item { margin: 0; }
 .nav-link {
   display: inline-block;
-  color: #000000;
+  color: var(--fg);
   text-decoration: none;
-  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-family: var(--font-body);
   font-weight: 500;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 10px 16px;
-  position: relative;
-  transition: all 0.1s ease-out;
+  padding: 10px 14px;
   border: 2px solid transparent;
   background: transparent;
   cursor: pointer;
 }
 .nav-link:hover, .nav-link.active {
-  background: #000000;
-  color: #FFFFFF;
+  background: var(--fg);
+  color: var(--bg);
 }
+
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+}
+.theme-toggle:hover { background: var(--fg); color: var(--bg); }
+.theme-toggle svg { width: 18px; height: 18px; }
 
 .menu-icon {
   display: none;
   cursor: pointer;
-  background: #FFFFFF;
-  border: 2px solid #000000;
+  background: var(--bg);
+  border: 2px solid var(--border);
   padding: 8px;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   align-items: center;
   justify-content: center;
+  color: var(--fg);
 }
-.menu-icon:hover { background: #000000; }
-.menu-icon:hover .hamburger span { background: #FFFFFF; }
-.menu-icon:focus-visible { outline: 3px solid #000000; outline-offset: 3px; }
+.menu-icon:hover { background: var(--fg); color: var(--bg); }
 
-.hamburger { width: 22px; height: 16px; position: relative; }
+.hamburger { width: 20px; height: 14px; position: relative; }
 .hamburger span {
   display: block;
   position: absolute;
   height: 2px;
   width: 100%;
-  background: #000000;
-  transition: all 0.2s ease-out;
+  background: currentColor;
 }
 .hamburger span:nth-child(1) { top: 0; }
-.hamburger span:nth-child(2) { top: 7px; }
-.hamburger span:nth-child(3) { top: 14px; }
-.hamburger.active span:nth-child(1) { transform: rotate(45deg); top: 7px; }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: rotate(-45deg); top: 7px; }
+.hamburger span:nth-child(2) { top: 6px; }
+.hamburger span:nth-child(3) { top: 12px; }
 
 @media screen and (max-width: 768px) {
   .navbar-container { padding: 0 1rem; }
@@ -110,16 +120,13 @@
     left: 0;
     width: 100%;
     flex-direction: column;
-    background: #FFFFFF;
-    border-bottom: 2px solid #000000;
+    background: var(--bg);
+    border-bottom: 2px solid var(--border);
     padding: 0;
     gap: 0;
-    transform: translateY(-100%);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease-out;
+    display: none;
   }
-  .nav-menu.active { transform: translateY(0); opacity: 1; visibility: visible; }
-  .nav-item { width: 100%; border-top: 2px solid #000000; }
-  .nav-link { display: block; width: 100%; padding: 18px 24px; text-align: left; box-sizing: border-box; }
+  .nav-menu.active { display: flex; }
+  .nav-item { width: 100%; border-top: 2px solid var(--border); }
+  .nav-link { display: block; width: 100%; padding: 16px 20px; text-align: left; box-sizing: border-box; }
 }

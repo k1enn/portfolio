@@ -7,7 +7,7 @@ const currentYear = new Date().getFullYear();
     <div class="footer-row">
       <div class="footer-brand">
         <span class="footer-dot" aria-hidden="true"></span>
-        <span class="footer-logo">K1EN / TRUNG KIEN</span>
+        <span class="footer-logo">k1en / Trung Kien</span>
       </div>
       <div class="footer-meta">
         <span>© {currentYear}</span>
@@ -15,17 +15,110 @@ const currentYear = new Date().getFullYear();
         <span>Hanoi, VN</span>
       </div>
     </div>
-    <div class="footer-tagline-wrap">
-      <p class="footer-tagline">// No frameworks harmed in the making of this site.</p>
+
+    <div class="footer-game-wrap" aria-label="Dinosaur game">
+      <p class="footer-game-hint">// Press Space or tap to jump</p>
+      <div id="main-frame-error" class="interstitial-wrapper" tabindex="0">
+        <div id="main-content">
+          <div class="icon icon-offline" alt="" aria-hidden="true"></div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <img id="offline-resources-1x" src="/trex/sprite-1x.png" alt="" hidden aria-hidden="true" />
+  <img id="offline-resources-2x" src="/trex/sprite-2x.png" alt="" hidden aria-hidden="true" />
 </footer>
+
+<link rel="stylesheet" href="/trex/trex.css" />
+
+<script is:inline src="/trex/trex.js"></script>
+
+<script is:inline>
+  (function () {
+    if (typeof Runner === "undefined") return;
+
+    function hexToRgb(h) {
+      h = (h || "").trim().replace("#", "");
+      if (h.length === 3) h = h.split("").map(function (c) { return c + c; }).join("");
+      if (h.length !== 6) return [26, 26, 26];
+      return [
+        parseInt(h.slice(0, 2), 16),
+        parseInt(h.slice(2, 4), 16),
+        parseInt(h.slice(4, 6), 16),
+      ];
+    }
+
+    function getFg() {
+      return getComputedStyle(document.documentElement)
+        .getPropertyValue("--fg") || "#1a1a1a";
+    }
+
+    function recolor(img, color) {
+      var c = document.createElement("canvas");
+      c.width = img.naturalWidth;
+      c.height = img.naturalHeight;
+      var ctx = c.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      var d = ctx.getImageData(0, 0, c.width, c.height);
+      var rgb = hexToRgb(color);
+      for (var i = 0; i < d.data.length; i += 4) {
+        if (d.data[i + 3] > 0) {
+          d.data[i] = rgb[0];
+          d.data[i + 1] = rgb[1];
+          d.data[i + 2] = rgb[2];
+        }
+      }
+      ctx.putImageData(d, 0, 0);
+      c.complete = true;
+      return c;
+    }
+
+    Runner.prototype.loadSounds = function () { this.audioContext = null; };
+
+    Runner.prototype.loadImages = function () {
+      var self = this;
+      var isHidpi = window.devicePixelRatio > 1;
+      self.spriteDef = isHidpi ? Runner.spriteDefinition.HDPI : Runner.spriteDefinition.LDPI;
+      var imgEl = document.getElementById(
+        isHidpi ? "offline-resources-2x" : "offline-resources-1x"
+      );
+
+      function ready() {
+        Runner.imageSprite = recolor(imgEl, getFg());
+        self.init();
+      }
+
+      if (imgEl.complete && imgEl.naturalWidth > 0) ready();
+      else imgEl.addEventListener("load", ready, { once: true });
+    };
+
+    function refreshSprite() {
+      var inst = Runner.instance_;
+      if (!inst) return;
+      var isHidpi = window.devicePixelRatio > 1;
+      var imgEl = document.getElementById(
+        isHidpi ? "offline-resources-2x" : "offline-resources-1x"
+      );
+      if (!imgEl || !imgEl.complete) return;
+      Runner.imageSprite = recolor(imgEl, getFg());
+    }
+
+    new MutationObserver(refreshSprite).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (mq.addEventListener) mq.addEventListener("change", refreshSprite);
+    else if (mq.addListener) mq.addListener(refreshSprite);
+  })();
+</script>
 
 <style>
   .site-footer {
-    background: #000;
-    color: #FFF;
-    border-top: 2px solid #000;
+    background: var(--bg);
+    color: var(--fg);
+    border-top: 2px solid var(--border);
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
@@ -36,42 +129,52 @@ const currentYear = new Date().getFullYear();
     justify-content: space-between;
     gap: 1rem;
   }
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  .footer-brand { display: flex; align-items: center; gap: 12px; }
   .footer-dot {
     display: inline-block;
     width: 14px;
     height: 14px;
-    background: #FFF;
+    background: var(--fg);
   }
   .footer-logo {
     font-family: var(--font-display);
     font-size: 1.25rem;
-    text-transform: uppercase;
     letter-spacing: -0.02em;
+    font-weight: 700;
   }
   .footer-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    color: var(--muted);
   }
-  .footer-tagline-wrap {
-    margin-top: 1.5rem;
-    border-top: 2px solid #FFF;
-    padding-top: 1rem;
+  .footer-game-wrap {
+    margin-top: 2rem;
+    border-top: 2px solid var(--border);
+    padding-top: 1.5rem;
   }
-  .footer-tagline {
-    font-family: var(--font-mono);
+  .footer-game-hint {
     font-size: 0.75rem;
-    color: #D4D4D4;
     letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .interstitial-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    outline: none;
+  }
+  .interstitial-wrapper canvas {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    image-rendering: pixelated;
+    background: var(--bg);
   }
   @media (min-width: 768px) {
     .site-footer { padding-top: 2.5rem; padding-bottom: 2.5rem; }

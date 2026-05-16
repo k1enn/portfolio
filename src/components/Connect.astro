@@ -14,27 +14,27 @@ const SOCIAL_LINKS = [
 ];
 ---
 
-<section id="connect" aria-labelledby="connect-heading" class="connect-section">
+<section id="contact" aria-labelledby="contact-heading" class="contact-section">
   <div class="container">
-    <SectionHeading id="connect-heading" index={2}>Connect</SectionHeading>
+    <SectionHeading id="contact-heading" index={3}>Contact</SectionHeading>
 
-    <div class="connect-grid reveal">
+    <div class="contact-grid">
       {
         SOCIAL_LINKS.map(({ url, Icon, label, handle }) => (
           <a
-            class="connect-card"
+            class="contact-card"
             href={url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${label} — ${handle} (opens in new tab)`}
           >
-            <div class="connect-top">
-              <Icon className="connect-icon" aria-hidden="true" />
-              <span class="connect-arrow">↗</span>
+            <div class="contact-top">
+              <Icon className="contact-icon" aria-hidden="true" />
+              <span class="contact-arrow">↗</span>
             </div>
-            <div class="connect-body">
-              <span class="connect-label">{label}</span>
-              <span class="connect-handle">{handle}</span>
+            <div class="contact-body">
+              <span class="contact-label">{label}</span>
+              <span class="contact-handle">{handle}</span>
             </div>
           </a>
         ))
@@ -44,20 +44,20 @@ const SOCIAL_LINKS = [
 </section>
 
 <style>
-  .connect-section {
+  .contact-section {
     padding-top: 4rem;
     padding-bottom: 4rem;
-    background: #FFF;
-    border-top: 2px solid #000;
+    background: var(--bg);
+    border-top: 2px solid var(--border);
   }
-  .connect-grid {
+  .contact-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    border: 2px solid #000;
-    background: #FFF;
+    border: 2px solid var(--border);
+    background: var(--bg);
     box-shadow: var(--shadow-brutal);
   }
-  .connect-card {
+  .contact-card {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -65,53 +65,53 @@ const SOCIAL_LINKS = [
     gap: 12px;
     padding: 16px;
     min-height: 140px;
-    background: #FFF;
-    color: #000;
-    border-right: 2px solid #000;
-    border-bottom: 2px solid #000;
-    transition: all 0.12s ease-out;
+    background: var(--bg);
+    color: var(--fg);
+    border-right: 2px solid var(--border);
+    border-bottom: 2px solid var(--border);
   }
-  .connect-card:hover, .connect-card:focus-visible {
-    background: #000;
-    color: #FFF;
+  .contact-card:hover, .contact-card:focus-visible {
+    background: var(--fg);
+    color: var(--bg);
     outline: none;
     text-decoration: none;
   }
-  .connect-top {
+  .contact-top {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .connect-icon { font-size: 28px; }
-  .connect-arrow {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+  .contact-icon { font-size: 28px; }
+  .contact-arrow {
+    font-size: 0.78rem;
     letter-spacing: 0.1em;
   }
-  .connect-body { display: flex; flex-direction: column; }
-  .connect-label {
+  .contact-body { display: flex; flex-direction: column; }
+  .contact-label {
     font-family: var(--font-display);
     font-size: 1rem;
-    text-transform: uppercase;
     letter-spacing: -0.02em;
     line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
   }
-  .connect-handle {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+  .contact-handle {
+    font-size: 0.78rem;
     margin-top: 4px;
-    text-transform: lowercase;
     letter-spacing: 0.04em;
+    color: var(--muted);
   }
+  .contact-card:hover .contact-handle,
+  .contact-card:focus-visible .contact-handle { color: var(--bg); }
   @media (min-width: 640px) {
-    .connect-grid { grid-template-columns: repeat(3, 1fr); }
-    .connect-card { padding: 20px; min-height: 160px; }
-    .connect-icon { font-size: 32px; }
-    .connect-label { font-size: 1.1rem; }
+    .contact-grid { grid-template-columns: repeat(3, 1fr); }
+    .contact-card { padding: 20px; min-height: 160px; }
+    .contact-icon { font-size: 32px; }
+    .contact-label { font-size: 1.1rem; }
   }
   @media (min-width: 768px) {
-    .connect-section { padding-top: 6rem; padding-bottom: 6rem; }
-    .connect-grid { grid-template-columns: repeat(4, 1fr); }
+    .contact-section { padding-top: 6rem; padding-bottom: 6rem; }
+    .contact-grid { grid-template-columns: repeat(4, 1fr); }
   }
 </style>

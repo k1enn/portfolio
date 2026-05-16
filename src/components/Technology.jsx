@@ -1,5 +1,3 @@
-import { useRef, useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 import {
   SiFlutter,
   SiDotnet,
@@ -14,8 +12,7 @@ import {
   SiNestjs,
   SiAstro,
 } from "react-icons/si";
-import { TbBrandCSharp } from "react-icons/tb";
-import { FaJava, FaCss3Alt } from "react-icons/fa";
+import { FaJava } from "react-icons/fa";
 import { DiMsqlServer } from "react-icons/di";
 
 const TECHNOLOGIES = [
@@ -37,58 +34,13 @@ const TECHNOLOGIES = [
 ];
 
 export default function Technology() {
-  const looped = [...TECHNOLOGIES, ...TECHNOLOGIES];
-  const scrollRef = useRef(null);
-  const prefersReducedMotion = useReducedMotion();
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    if (prefersReducedMotion || paused) return;
-    let id;
-    const step = () => {
-      if (scrollRef.current) {
-        const el = scrollRef.current;
-        el.scrollLeft += 0.6;
-        if (el.scrollLeft >= el.scrollWidth / 2) {
-          el.scrollLeft = 0;
-        }
-      }
-      id = requestAnimationFrame(step);
-    };
-    id = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(id);
-  }, [paused, prefersReducedMotion]);
-
   return (
-    <div
-      style={{
-        marginTop: "2rem",
-        border: "2px solid #000",
-        background: "#FFF",
-        boxShadow: "var(--shadow-brutal)",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        ref={scrollRef}
-        className="tech-row"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onTouchStart={() => setPaused(true)}
-        onTouchEnd={() => setTimeout(() => setPaused(false), 2000)}
-        style={{
-          display: "flex",
-          overflowX: "auto",
-          padding: 0,
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
-      >
-        {looped.map((tech, index) => {
+    <div className="tech-wrap">
+      <div className="tech-grid">
+        {TECHNOLOGIES.map((tech) => {
           const Icon = tech.icon;
           return (
-            <div key={index} className="tech-cell">
+            <div key={tech.name} className="tech-cell">
               <Icon className="tech-icon" aria-hidden="true" />
               <span className="tech-name">{tech.name}</span>
             </div>
@@ -96,34 +48,45 @@ export default function Technology() {
         })}
       </div>
       <style>{`
-        .tech-row::-webkit-scrollbar { display: none; }
+        .tech-wrap {
+          margin-top: 2rem;
+          border: 2px solid var(--border);
+          background: var(--bg);
+          box-shadow: var(--shadow-brutal);
+        }
+        .tech-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+        }
         .tech-cell {
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          flex-shrink: 0;
-          min-width: 120px;
-          height: 120px;
-          border-right: 2px solid #000;
-          background: #FFF;
-          color: #000;
-          transition: all 0.12s ease-out;
+          padding: 24px 12px;
+          min-height: 120px;
+          background: var(--bg);
+          color: var(--fg);
+          border-right: 2px solid var(--border);
+          border-bottom: 2px solid var(--border);
         }
-        .tech-cell:hover { background: #000; color: #FFF; }
-        .tech-icon { font-size: 36px; margin-bottom: 12px; }
+        .tech-cell:hover { background: var(--fg); color: var(--bg); }
+        .tech-icon { font-size: 32px; margin-bottom: 10px; }
         .tech-name {
-          font-family: var(--font-mono);
-          font-size: 0.72rem;
-          font-weight: 700;
+          font-size: 0.78rem;
+          font-weight: 500;
           text-align: center;
           text-transform: uppercase;
           letter-spacing: 0.06em;
-          padding: 0 8px;
+          padding: 0 4px;
         }
-        @media (min-width: 640px) {
-          .tech-cell { min-width: 140px; height: 140px; }
-          .tech-icon { font-size: 44px; }
+        @media (min-width: 480px) {
+          .tech-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (min-width: 768px) {
+          .tech-grid { grid-template-columns: repeat(5, 1fr); }
+          .tech-cell { min-height: 140px; padding: 28px 14px; }
+          .tech-icon { font-size: 40px; }
         }
       `}</style>
     </div>

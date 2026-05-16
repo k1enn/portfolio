@@ -16,11 +16,11 @@ const Tag = as;
         <span class="section-heading-index">{String(index).padStart(2, "0")} /</span>
       )
     }
-    <Tag id={id} class="section-heading-text reveal-left">
+    <Tag id={id} class="section-heading-text">
       <slot />
     </Tag>
   </div>
-  <div class="section-heading-bar reveal-underline" aria-hidden="true"></div>
+  <div class="section-heading-bar" aria-hidden="true"></div>
 </div>
 
 <style>
@@ -29,7 +29,7 @@ const Tag = as;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 2rem;
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid var(--border);
     padding-bottom: 16px;
   }
   .section-heading-row {
@@ -39,9 +39,8 @@ const Tag = as;
     flex-wrap: wrap;
   }
   .section-heading-index {
-    font-family: var(--font-mono);
     font-size: 0.85rem;
-    color: #737373;
+    color: var(--muted);
     letter-spacing: 0.1em;
   }
   .section-heading-text {
@@ -49,14 +48,15 @@ const Tag = as;
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     line-height: 0.95;
     letter-spacing: -0.04em;
-    color: #000;
-    text-transform: uppercase;
+    color: var(--fg);
     margin: 0;
+    font-weight: 700;
   }
   .section-heading-bar {
     margin-top: 8px;
     height: 6px;
-    background: #000;
+    width: 120px;
+    background: var(--fg);
   }
   @media (min-width: 768px) {
     .section-heading { margin-bottom: 3rem; }
