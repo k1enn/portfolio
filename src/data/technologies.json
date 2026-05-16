@@ -1,0 +1,45 @@
+[
+  {
+    "label": "Frontend",
+    "items": [
+      { "name": "ReactJS", "icon": "SiReact" },
+      { "name": "NextJS", "icon": "SiNextdotjs" },
+      { "name": "Astro", "icon": "SiAstro" },
+      { "name": "Flutter", "icon": "SiFlutter" },
+      { "name": "ShadCN", "icon": "SiShadcnui" },
+      { "name": "Wordpress", "icon": "SiWordpress" }
+    ]
+  },
+  {
+    "label": "Backend",
+    "items": [
+      { "name": "Java", "icon": "FaJava" },
+      { "name": "NodeJS", "icon": "SiNodedotjs" },
+      { "name": "Express", "icon": "SiExpress" },
+      { "name": "NestJS", "icon": "SiNestjs" },
+      { "name": ".NET Framework", "icon": "SiDotnet" },
+      { "name": ".NET Core", "icon": "SiDotnet" },
+      { "name": "HonoJS", "icon": "SiHono" },
+      { "name": "Elysia", "icon": "SiElysia" },
+      { "name": "DrizzleORM", "icon": "SiDrizzle" }
+    ]
+  },
+  {
+    "label": "Databases",
+    "items": [
+      { "name": "MongoDB", "icon": "SiMongodb" },
+      { "name": "PostgreSQL", "icon": "SiPostgresql" },
+      { "name": "SQL Server", "icon": "DiMsqlServer" },
+      { "name": "SQLite", "icon": "SiSqlite" }
+    ]
+  },
+  {
+    "label": "Cloud & Services",
+    "items": [
+      { "name": "Firebase", "icon": "SiFirebase" },
+      { "name": "Cloudflare", "icon": "SiCloudflare" },
+      { "name": "Backblaze", "icon": "SiBackblaze" },
+      { "name": "AWS", "icon": "FaAws" }
+    ]
+  }
+]

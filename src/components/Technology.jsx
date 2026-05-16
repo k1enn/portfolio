@@ -11,47 +11,40 @@ import {
   SiNextdotjs,
   SiNestjs,
   SiAstro,
+  SiSqlite,
+  SiHono,
+  SiDrizzle,
+  SiShadcnui,
+  SiBackblaze,
+  SiWordpress,
 } from "react-icons/si";
-import { FaJava } from "react-icons/fa";
+import { FaJava, FaAws } from "react-icons/fa";
 import { DiMsqlServer } from "react-icons/di";
+import categories from "../data/technologies.json";
 
-const CATEGORIES = [
-  {
-    label: "Frontend",
-    items: [
-      { name: "ReactJS", icon: SiReact },
-      { name: "NextJS", icon: SiNextdotjs },
-      { name: "Astro", icon: SiAstro },
-      { name: "Flutter", icon: SiFlutter },
-    ],
-  },
-  {
-    label: "Backend",
-    items: [
-      { name: "Java", icon: FaJava },
-      { name: "NodeJS", icon: SiNodedotjs },
-      { name: "Express", icon: SiExpress },
-      { name: "NestJS", icon: SiNestjs },
-      { name: ".NET Framework", icon: SiDotnet },
-      { name: ".NET Core", icon: SiDotnet },
-    ],
-  },
-  {
-    label: "Databases",
-    items: [
-      { name: "MongoDB", icon: SiMongodb },
-      { name: "PostgreSQL", icon: SiPostgresql },
-      { name: "SQL Server", icon: DiMsqlServer },
-    ],
-  },
-  {
-    label: "Cloud & Services",
-    items: [
-      { name: "Firebase", icon: SiFirebase },
-      { name: "Cloudflare", icon: SiCloudflare },
-    ],
-  },
-];
+const ICONS = {
+  SiFlutter,
+  SiDotnet,
+  SiNodedotjs,
+  SiExpress,
+  SiReact,
+  SiMongodb,
+  SiFirebase,
+  SiCloudflare,
+  SiPostgresql,
+  SiNextdotjs,
+  SiNestjs,
+  SiAstro,
+  SiSqlite,
+  SiHono,
+  SiDrizzle,
+  SiShadcnui,
+  SiBackblaze,
+  SiWordpress,
+  FaJava,
+  FaAws,
+  DiMsqlServer,
+};
 
 const COLS = 4;
 const pad2 = (n) => String(n).padStart(2, "0");
@@ -63,7 +56,7 @@ const padItems = (items) => {
 export default function Technology() {
   return (
     <div className="tech-wrap">
-      {CATEGORIES.map((cat) => {
+      {categories.map((cat) => {
         const cells = padItems(cat.items);
         return (
           <section key={cat.label} className="tech-section">
@@ -76,10 +69,10 @@ export default function Technology() {
                 if (!tech) {
                   return <div key={`pad-${i}`} className="tech-cell tech-cell--empty" aria-hidden="true" />;
                 }
-                const Icon = tech.icon;
+                const Icon = ICONS[tech.icon];
                 return (
-                  <div key={tech.name} className="tech-cell">
-                    <Icon className="tech-icon" aria-hidden="true" />
+                  <div key={`${cat.label}-${tech.name}`} className="tech-cell">
+                    {Icon ? <Icon className="tech-icon" aria-hidden="true" /> : null}
                     <span className="tech-name">{tech.name}</span>
                   </div>
                 );
