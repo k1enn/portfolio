@@ -47,25 +47,28 @@ const currentYear = new Date().getFullYear();
       ];
     }
 
-    function getFg() {
-      return getComputedStyle(document.documentElement)
-        .getPropertyValue("--fg") || "#1a1a1a";
+    function readVar(name, fallback) {
+      var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      return v || fallback;
     }
 
-    function recolor(img, color) {
+    function recolor(img) {
+      var ink = hexToRgb(readVar("--fg", "#1a1a1a"));
+      var paper = hexToRgb(readVar("--bg", "#f0f0f0"));
       var c = document.createElement("canvas");
       c.width = img.naturalWidth;
       c.height = img.naturalHeight;
       var ctx = c.getContext("2d");
       ctx.drawImage(img, 0, 0);
       var d = ctx.getImageData(0, 0, c.width, c.height);
-      var rgb = hexToRgb(color);
-      for (var i = 0; i < d.data.length; i += 4) {
-        if (d.data[i + 3] > 0) {
-          d.data[i] = rgb[0];
-          d.data[i + 1] = rgb[1];
-          d.data[i + 2] = rgb[2];
-        }
+      var px = d.data;
+      for (var i = 0; i < px.length; i += 4) {
+        if (px[i + 3] === 0) continue;
+        var lum = 0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2];
+        var t = lum < 128 ? ink : paper;
+        px[i] = t[0];
+        px[i + 1] = t[1];
+        px[i + 2] = t[2];
       }
       ctx.putImageData(d, 0, 0);
       c.complete = true;
@@ -85,7 +88,7 @@ const currentYear = new Date().getFullYear();
       );
 
       function ready() {
-        Runner.imageSprite = recolor(imgEl, getFg());
+        Runner.imageSprite = recolor(imgEl);
         self.init();
       }
 
@@ -101,7 +104,7 @@ const currentYear = new Date().getFullYear();
         isHidpi ? "offline-resources-2x" : "offline-resources-1x"
       );
       if (!imgEl || !imgEl.complete) return;
-      Runner.imageSprite = recolor(imgEl, getFg());
+      Runner.imageSprite = recolor(imgEl);
     }
 
     new MutationObserver(refreshSprite).observe(document.documentElement, {
@@ -180,31 +183,5 @@ const currentYear = new Date().getFullYear();
 </style>
 
 <style is:global>
-  body.arcade-mode { overflow: visible !important; max-width: none !important; }
-  body.arcade-mode .interstitial-wrapper { height: 150px !important; max-width: 600px !important; overflow: hidden !important; }
-  .runner-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 150px;
-    overflow: hidden;
-  }
-  .runner-canvas {
-    display: block;
-    image-rendering: pixelated;
-    background: transparent;
-    position: relative;
-    top: 0;
-    z-index: 2;
-  }
-  .interstitial-wrapper .controller {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 3;
-    background: transparent;
-    cursor: pointer;
-  }
+
 </style>
