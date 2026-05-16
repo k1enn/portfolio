@@ -30,8 +30,6 @@ const currentYear = new Date().getFullYear();
   <img id="offline-resources-2x" src="/trex/sprite-2x.png" alt="" hidden aria-hidden="true" />
 </footer>
 
-<link rel="stylesheet" href="/trex/trex.css" />
-
 <script is:inline src="/trex/trex.js"></script>
 
 <script is:inline>
@@ -75,6 +73,8 @@ const currentYear = new Date().getFullYear();
     }
 
     Runner.prototype.loadSounds = function () { this.audioContext = null; };
+    Runner.prototype.setArcadeMode = function () {};
+    Runner.prototype.setArcadeModeContainerScale = function () {};
 
     Runner.prototype.loadImages = function () {
       var self = this;
@@ -165,20 +165,46 @@ const currentYear = new Date().getFullYear();
   .interstitial-wrapper {
     width: 100%;
     max-width: 600px;
+    height: 150px;
     margin: 0 auto;
     outline: none;
+    position: relative;
+    overflow: hidden;
   }
-  .interstitial-wrapper canvas {
-    display: block;
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    image-rendering: pixelated;
-    background: var(--bg);
-  }
+  #main-content { display: none; }
   @media (min-width: 768px) {
     .site-footer { padding-top: 2.5rem; padding-bottom: 2.5rem; }
     .footer-row { flex-direction: row; align-items: center; }
     .footer-logo { font-size: 1.5rem; }
+  }
+</style>
+
+<style is:global>
+  body.arcade-mode { overflow: visible !important; max-width: none !important; }
+  body.arcade-mode .interstitial-wrapper { height: 150px !important; max-width: 600px !important; overflow: hidden !important; }
+  .runner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 150px;
+    overflow: hidden;
+  }
+  .runner-canvas {
+    display: block;
+    image-rendering: pixelated;
+    background: transparent;
+    position: relative;
+    top: 0;
+    z-index: 2;
+  }
+  .interstitial-wrapper .controller {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background: transparent;
+    cursor: pointer;
   }
 </style>
