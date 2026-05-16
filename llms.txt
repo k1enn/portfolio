@@ -1,0 +1,27 @@
+# Portfolio — k1en
+
+> Personal portfolio site of k1en (Astro 5 + React islands). Showcases featured projects, tech stack, and contact links. Migrated from CRA + Chakra UI to Astro for static-site performance.
+
+## Routes
+
+- [Home](https://k1en.me/): Hero, tech carousel, connect, featured projects, footer
+- [Projects](https://k1en.me/projects): Full project grid
+
+## Source
+
+- [README](https://github.com/k1enn/portfolio/blob/main/README.md): Stack, scripts, structure, deploy notes
+- [projects.json](https://github.com/k1enn/portfolio/blob/main/src/data/projects.json): Project list (title, description, image, link, tags)
+- [technologies.json](https://github.com/k1enn/portfolio/blob/main/src/data/technologies.json): Tech stack carousel data
+
+## Stack
+
+- Astro 5 (SSG)
+- React 18 islands (`client:load`) for interactive components
+- Framer Motion animations
+- React Icons
+- Plain CSS + design tokens via CSS variables
+
+## Optional
+
+- [Astro Config](https://github.com/k1enn/portfolio/blob/main/astro.config.mjs): Build config
+- [Deploy](https://k1en.site): GitHub Pages mirror via `public/CNAME`
