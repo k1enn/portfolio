@@ -3,7 +3,7 @@ const path = require('path');
 
 const TREX_DIR = path.join(__dirname, '..', 'public', 'trex');
 const PLAN_DIR = path.join(__dirname, '..', 'plans', '260516-1430-trex-theme-integration');
-const BG_THRESHOLD = 235;
+const LUM_THRESHOLD = 200;
 
 async function recolor(inputPath, outputPath) {
   const { data, info } = await sharp(inputPath)
@@ -16,12 +16,12 @@ async function recolor(inputPath, outputPath) {
     const r = data[i], g = data[i + 1], b = data[i + 2];
     const lum = (r * 0.299 + g * 0.587 + b * 0.114) | 0;
 
-    if (lum >= BG_THRESHOLD) {
-      data[i] = 0; data[i + 1] = 0; data[i + 2] = 0; data[i + 3] = 0;
+    data[i] = 0; data[i + 1] = 0; data[i + 2] = 0;
+    if (lum >= LUM_THRESHOLD) {
+      data[i + 3] = 0;
       bg++;
     } else {
-      data[i] = 0; data[i + 1] = 0; data[i + 2] = 0;
-      data[i + 3] = 255 - lum;
+      data[i + 3] = 255;
       fg++;
     }
   }
