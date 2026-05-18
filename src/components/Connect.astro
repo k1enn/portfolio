@@ -1,7 +1,9 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
-import { FaLinkedin, FaGithub, FaYoutube, FaDiscord, FaFacebook } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaYoutube, FaDiscord, FaFacebook, FaRegEnvelope } from "react-icons/fa";
 import { SiCodeforces, SiLeetcode } from "react-icons/si";
+
+const EMAIL = "dinhtrungkien05@gmail.com";
 
 const SOCIAL_LINKS = [
   { url: "https://linkedin.com/in/k1enn", Icon: FaLinkedin, label: "LinkedIn", handle: "@k1enn" },
@@ -14,6 +16,28 @@ const SOCIAL_LINKS = [
 <section id="contact" aria-labelledby="contact-heading" class="contact-section">
   <div class="container">
     <SectionHeading id="contact-heading" index={3}>Contact</SectionHeading>
+
+    <a
+      class="email-cta"
+      href={`mailto:${EMAIL}?subject=Hello%20Trung%20Kien`}
+      aria-label={`Email Trung Kien at ${EMAIL}`}
+    >
+      <div class="email-cta-left">
+        <span class="email-eyebrow">Direct · Best for work</span>
+        <span class="email-headline">Email Me</span>
+        <span class="email-address">{EMAIL}</span>
+      </div>
+      <div class="email-cta-right" aria-hidden="true">
+        <FaRegEnvelope className="email-icon" />
+        <span class="email-arrow">↗</span>
+      </div>
+    </a>
+
+    <div class="contact-divider" aria-hidden="true">
+      <span class="contact-divider-line"></span>
+      <span class="contact-divider-text">Or find me on</span>
+      <span class="contact-divider-line"></span>
+    </div>
 
     <div class="contact-grid">
       {
@@ -47,6 +71,91 @@ const SOCIAL_LINKS = [
     background: var(--bg);
     border-top: 2px solid var(--border);
   }
+  .email-cta {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding: 20px;
+    background: var(--bg);
+    color: var(--fg);
+    border: 2px solid var(--border);
+    margin-bottom: 2rem;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .email-cta:hover, .email-cta:focus-visible {
+    background: var(--fg);
+    color: var(--bg);
+    outline: none;
+    text-decoration: none;
+  }
+  .email-cta-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+  .email-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .email-cta:hover .email-eyebrow,
+  .email-cta:focus-visible .email-eyebrow { color: var(--bg); }
+  .email-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .email-address {
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    word-break: break-all;
+  }
+  .email-cta-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-shrink: 0;
+  }
+  .email-icon { font-size: 36px; }
+  .email-arrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+  }
+  @media (min-width: 640px) {
+    .email-cta { padding: 28px 32px; }
+    .email-icon { font-size: 44px; }
+  }
+  @media (min-width: 768px) {
+    .email-cta { padding: 36px 40px; margin-bottom: 2.5rem; }
+    .email-icon { font-size: 52px; }
+  }
+
+  .contact-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 1.5rem;
+  }
+  .contact-divider-line {
+    flex: 1;
+    height: 2px;
+    background: var(--border);
+  }
+  .contact-divider-text {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
   .contact-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
