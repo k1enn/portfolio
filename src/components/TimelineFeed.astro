@@ -90,7 +90,11 @@ const hasMore = items.length > initialCount;
       const next = !expanded;
       btn.setAttribute('aria-expanded', String(next));
       rows.forEach((el, i) => {
-        if (i >= initial) el.toggleAttribute('data-tl-hidden', !next);
+        if (i >= initial) {
+          el.toggleAttribute('data-tl-hidden', !next);
+          // Don't depend on the scroll observer for entries revealed by the button.
+          el.dataset.reveal = next ? 'in' : 'pending';
+        }
         if (i === initial - 1) el.toggleAttribute('data-tl-rail-end', !next);
       });
       labelMore?.toggleAttribute('hidden', next);
