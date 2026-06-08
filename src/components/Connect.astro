@@ -68,7 +68,7 @@ const SOCIAL_LINKS = [
     padding-top: 4rem;
     padding-bottom: 4rem;
     background: var(--bg);
-    border-top: 2px solid var(--border);
+    border-top: 1px solid var(--line);
   }
   .email-cta {
     display: flex;
@@ -97,7 +97,7 @@ const SOCIAL_LINKS = [
   }
   .email-eyebrow {
     font-size: 0.72rem;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
   }
@@ -109,7 +109,6 @@ const SOCIAL_LINKS = [
     line-height: 0.95;
     letter-spacing: -0.04em;
     font-weight: 700;
-    text-transform: uppercase;
   }
   .email-address {
     font-size: 0.85rem;
@@ -149,18 +148,17 @@ const SOCIAL_LINKS = [
     background: var(--border);
   }
   .contact-divider-text {
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
     color: var(--muted);
   }
 
   .contact-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    border-top: 2px solid var(--border);
-    border-left: 2px solid var(--border);
-    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    background: var(--surface);
   }
   .contact-card {
     display: flex;
@@ -170,14 +168,14 @@ const SOCIAL_LINKS = [
     gap: 12px;
     padding: 16px;
     min-height: 140px;
-    background: var(--bg);
+    background: var(--surface);
     color: var(--fg);
-    border-right: 2px solid var(--border);
-    border-bottom: 2px solid var(--border);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s ease;
   }
   .contact-card:hover, .contact-card:focus-visible {
-    background: var(--fg);
-    color: var(--bg);
+    background: var(--surface-hover);
     outline: none;
     text-decoration: none;
   }
@@ -195,11 +193,10 @@ const SOCIAL_LINKS = [
   .contact-body { display: flex; flex-direction: column; }
   .contact-label {
     font-family: var(--font-display);
-    font-size: 1rem;
+    font-size: 1.05rem;
     letter-spacing: -0.02em;
     line-height: 1;
     font-weight: 700;
-    text-transform: uppercase;
   }
   .contact-handle {
     font-size: 0.78rem;
@@ -208,7 +205,7 @@ const SOCIAL_LINKS = [
     color: var(--muted);
   }
   .contact-card:hover .contact-handle,
-  .contact-card:focus-visible .contact-handle { color: var(--bg); }
+  .contact-card:focus-visible .contact-handle { color: var(--fg); }
   @media (min-width: 640px) {
     .contact-grid { grid-template-columns: repeat(3, 1fr); }
     .contact-card { padding: 20px; min-height: 160px; }

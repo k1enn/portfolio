@@ -79,7 +79,7 @@ const hasMore = totalCount > initialCount;
     padding-top: 4rem;
     padding-bottom: 4rem;
     background: var(--bg);
-    border-top: 2px solid var(--border);
+    border-top: 1px solid var(--line);
   }
   .projects-meta-row {
     display: flex;
@@ -89,8 +89,8 @@ const hasMore = totalCount > initialCount;
     flex-wrap: wrap;
     gap: 12px;
     font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.02em;
+    color: var(--muted);
   }
   .projects-tag {
     display: inline-flex;
@@ -119,21 +119,19 @@ const hasMore = totalCount > initialCount;
   }
   .load-more-btn {
     font-family: inherit;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.02em;
     padding: 14px 28px;
-    background: var(--bg);
+    background: var(--surface);
     color: var(--fg);
     border: 2px solid var(--border);
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease;
+    transition: background 0.15s ease;
   }
   .load-more-btn:hover,
   .load-more-btn:focus-visible {
-    background: var(--fg);
-    color: var(--bg);
+    background: var(--surface-hover);
     outline: none;
   }
   @media (min-width: 768px) {

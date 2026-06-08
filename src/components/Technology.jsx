@@ -113,26 +113,25 @@ export default function Technology() {
       <style>{`
         .tech-wrap {
           margin-top: 2rem;
-          border: 2px solid var(--border);
-          background: var(--bg);
+          border: 1px solid var(--line);
+          background: var(--surface);
         }
         .tech-section + .tech-section {
-          border-top: 2px solid var(--border);
+          border-top: 1px solid var(--line);
         }
         .tech-head {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 10px 14px;
-          background: var(--fg);
-          color: var(--bg);
-          border-bottom: 2px solid var(--border);
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
+          padding: 11px 16px;
+          background: var(--surface-hover);
+          color: var(--fg);
+          border-bottom: 1px solid var(--line);
+          letter-spacing: 0.02em;
         }
         .tech-head-label {
           font-weight: 700;
-          font-size: 0.9rem;
+          font-size: 0.95rem;
         }
         .tech-head-count {
           font-family: var(--font-display);
@@ -142,8 +141,8 @@ export default function Technology() {
         .tech-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 2px;
-          background: var(--border);
+          gap: 1px;
+          background: var(--line);
         }
         .tech-cell {
           display: flex;
@@ -152,16 +151,15 @@ export default function Technology() {
           justify-content: center;
           padding: 22px 12px;
           min-height: 112px;
-          background: var(--bg);
+          background: var(--surface);
           color: var(--fg);
           text-decoration: none;
-          transition: background 0.15s ease, color 0.15s ease;
+          transition: background 0.15s ease;
         }
         a.tech-cell { cursor: pointer; }
         a.tech-cell:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; }
         .tech-cell:not(.tech-cell--empty):hover {
-          background: var(--fg);
-          color: var(--bg);
+          background: var(--surface-hover);
         }
         .tech-icon { font-size: 30px; margin-bottom: 10px; }
         .tech-icon--img { width: 30px; height: 30px; object-fit: contain; display: block; }
@@ -175,11 +173,10 @@ export default function Technology() {
         :root[data-theme="light"] .tech-elysia-light { display: block; }
         :root[data-theme="light"] .tech-elysia-dark { display: none; }
         .tech-name {
-          font-size: 0.76rem;
+          font-size: 0.82rem;
           font-weight: 500;
           text-align: center;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
+          letter-spacing: 0.01em;
           padding: 0 4px;
         }
         @media (min-width: 768px) {

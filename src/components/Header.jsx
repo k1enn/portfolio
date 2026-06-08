@@ -49,7 +49,7 @@ export default function Header() {
           color: var(--fg);
           padding-top: clamp(120px, 14vw, 160px);
           padding-bottom: clamp(4rem, 8vw, 6rem);
-          border-bottom: 2px solid var(--border);
+          border-bottom: 1px solid var(--line);
           display: flex;
           align-items: center;
         }
@@ -59,7 +59,7 @@ export default function Header() {
           align-items: center;
           gap: 12px;
           font-size: 0.85rem;
-          letter-spacing: 0.15em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
           color: var(--muted);
         }
@@ -92,9 +92,8 @@ export default function Header() {
           display: flex;
           justify-content: space-between;
           align-items: baseline;
-          font-size: 0.78rem;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
+          font-size: 0.8rem;
+          letter-spacing: 0.02em;
         }
         .hero-progress-meta {
           color: var(--muted);
