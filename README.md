@@ -21,13 +21,14 @@ npm run preview   # serve dist/
 
 ## Layout
 
-Narrow single-column "cactus" shell (~720px). Home is one scroll: hero → combined
-career timeline (work + education + projects, newest first) → recent writing → tech →
-connect → footer. Blog lives on its own routes.
+Narrow single-column "cactus" shell (~720px). Home is one scroll: hero → experience
+(work + education, newest first) → projects (cards, newest first) → recent writing →
+tech → connect → footer. Sections alternate `--bg`/`--panel` for visual rhythm. Blog
+lives on its own routes.
 
 ## Routes
 
-- `/` — home (hero, timeline, recent writing, tech, connect, footer)
+- `/` — home (hero, experience, projects, recent writing, tech, connect, footer)
 - `/blog` — all posts
 - `/blog/[slug]` — a post
 - `/tags/[tag]` — posts filtered by tag
@@ -63,9 +64,10 @@ Header, Technology — anything that uses `window`, scroll listeners, or mount-t
 
 ## Static Astro components
 
-Footer, Connect, TimelineFeed, TimelineEntry, RecentWriting, PostCard, SectionHeading,
-Navbar — pure SSR; timeline reveal via a small inline IntersectionObserver (visible by
-default, reduced-motion safe).
+Footer, Connect, ExperienceFeed, TimelineEntry, ProjectsFeed, ProjectCard,
+RecentWriting, PostCard, SectionHeading, Navbar — pure SSR. ExperienceFeed reuses
+TimelineEntry (rail + dots, no images); ProjectsFeed renders uniform ProjectCard
+items with a "Show more" toggle past 6.
 
 ## Design tokens (frozen)
 
