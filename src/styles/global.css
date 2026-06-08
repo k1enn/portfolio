@@ -12,8 +12,11 @@
   --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-display: 'DM Sans', sans-serif;
   --font-mono: 'DM Sans', ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Real monospace — used only for blog code (`<code>`/`<pre>`). */
+  --font-code: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
-  --container-max: 1120px;
+  --container-max: 720px;
+  --measure: 680px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -100,6 +103,17 @@ button {
 }
 @media (min-width: 640px) {
   .container { padding: 0 2rem; }
+}
+
+/* Narrow reading column for long-form content (blog prose, etc.) */
+.measure {
+  width: 100%;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+@media (min-width: 640px) {
+  .measure { padding: 0 2rem; }
 }
 
 .skip-link {
