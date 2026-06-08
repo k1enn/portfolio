@@ -15,9 +15,11 @@ export interface TimelineItem {
 
 export interface Props {
   item: TimelineItem;
+  hidden?: boolean;
+  railEnd?: boolean;
 }
 
-const { item } = Astro.props;
+const { item, hidden = false, railEnd = false } = Astro.props;
 
 const TYPE_LABEL: Record<TimelineItem["type"], string> = {
   work: "Work",
@@ -46,7 +48,13 @@ const sizes = srcset ? "(min-width: 720px) 680px, 100vw" : undefined;
 const displaySrc = isVariant ? `${base}-400w.webp` : img;
 ---
 
-<li class="tl-entry" data-type={item.type} data-reveal="pending">
+<li
+  class="tl-entry"
+  data-type={item.type}
+  data-reveal="pending"
+  data-tl-hidden={hidden ? "true" : undefined}
+  data-tl-rail-end={railEnd ? "" : undefined}
+>
   <div class="tl-marker" aria-hidden="true">
     <span class="tl-dot"></span>
   </div>
@@ -119,6 +127,9 @@ const displaySrc = isVariant ? `${base}-400w.webp` : img;
     background: var(--line);
   }
   .tl-entry:last-child .tl-marker::before { height: 7px; }
+  /* Collapsed state: the last visible entry trims its rail to the dot. */
+  .tl-entry[data-tl-rail-end] .tl-marker::before { height: 7px; }
+  .tl-entry[data-tl-hidden] { display: none; }
   .tl-dot {
     position: absolute;
     left: 2px;

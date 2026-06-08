@@ -12,6 +12,10 @@ const items = [...(timelineData as TimelineItem[])].sort((a, b) => {
   if (ka !== kb) return kb.localeCompare(ka);
   return b.start.localeCompare(a.start);
 });
+
+// Show the first few; reveal the rest behind a "Show More" toggle.
+const initialCount = 4;
+const hasMore = items.length > initialCount;
 ---
 
 <section id="projects" aria-labelledby="projects-heading" class="timeline-section">
@@ -26,9 +30,30 @@ const items = [...(timelineData as TimelineItem[])].sort((a, b) => {
       </span>
     </div>
 
-    <ol class="timeline" data-timeline>
-      {items.map((item) => <TimelineEntry item={item} />)}
+    <ol class="timeline" data-timeline data-initial-count={initialCount}>
+      {items.map((item, i) => (
+        <TimelineEntry
+          item={item}
+          hidden={hasMore && i >= initialCount}
+          railEnd={hasMore && i === initialCount - 1}
+        />
+      ))}
     </ol>
+
+    {hasMore && (
+      <div class="timeline-actions">
+        <button
+          type="button"
+          class="timeline-more-btn"
+          data-tl-more
+          aria-expanded="false"
+          aria-controls="projects"
+        >
+          <span data-label-more>Show More ({items.length - initialCount})</span>
+          <span data-label-less hidden>Show Less</span>
+        </button>
+      </div>
+    )}
   </div>
 </section>
 
@@ -50,6 +75,28 @@ const items = [...(timelineData as TimelineItem[])].sort((a, b) => {
     entries.forEach((el) => io.observe(el));
   } else {
     entries.forEach((el) => el.removeAttribute('data-reveal'));
+  }
+
+  // Show More / Show Less toggle.
+  const feed = document.querySelector<HTMLElement>('[data-timeline]');
+  const btn = document.querySelector<HTMLButtonElement>('[data-tl-more]');
+  if (feed && btn) {
+    const initial = Number(feed.dataset.initialCount) || 4;
+    const rows = Array.from(feed.querySelectorAll<HTMLElement>('.tl-entry'));
+    const labelMore = btn.querySelector<HTMLElement>('[data-label-more]');
+    const labelLess = btn.querySelector<HTMLElement>('[data-label-less]');
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const next = !expanded;
+      btn.setAttribute('aria-expanded', String(next));
+      rows.forEach((el, i) => {
+        if (i >= initial) el.toggleAttribute('data-tl-hidden', !next);
+        if (i === initial - 1) el.toggleAttribute('data-tl-rail-end', !next);
+      });
+      labelMore?.toggleAttribute('hidden', next);
+      labelLess?.toggleAttribute('hidden', !next);
+      if (!next) feed.closest('section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 </script>
 
@@ -87,6 +134,28 @@ const items = [...(timelineData as TimelineItem[])].sort((a, b) => {
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+  .timeline-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  .timeline-more-btn {
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 12px 26px;
+    background: var(--surface);
+    color: var(--fg);
+    border: 2px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .timeline-more-btn:hover,
+  .timeline-more-btn:focus-visible {
+    background: var(--surface-hover);
+    outline: none;
   }
   @media (min-width: 768px) {
     .timeline-section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
