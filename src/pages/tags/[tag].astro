@@ -1,0 +1,85 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import PostCard from "../../components/PostCard.astro";
+import { slugify } from "../../utils/slugify";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) =>
+    import.meta.env.PROD ? !data.draft : true
+  );
+
+  // Group posts by tag slug, preserving the original tag label for display.
+  const groups = new Map<string, { label: string; posts: typeof posts }>();
+  for (const post of posts) {
+    for (const tag of post.data.tags) {
+      const slug = slugify(tag);
+      if (!groups.has(slug)) groups.set(slug, { label: tag, posts: [] });
+      groups.get(slug)!.posts.push(post);
+    }
+  }
+
+  return [...groups.entries()].map(([slug, { label, posts }]) => ({
+    params: { tag: slug },
+    props: {
+      label,
+      posts: posts.sort(
+        (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+      ),
+    },
+  }));
+}
+
+const { label, posts } = Astro.props;
+---
+
+<Layout title={`#${label} — Trung Kien`} description={`Posts tagged ${label}.`}>
+  <Navbar />
+  <main>
+    <section class="tag-page measure">
+      <a class="tag-back" href="/blog">← All posts</a>
+      <header class="tag-head">
+        <h1 class="tag-title">#{label}</h1>
+        <p class="tag-sub">{posts.length} {posts.length === 1 ? "post" : "posts"}</p>
+      </header>
+      <div class="tag-list">
+        {posts.map((post) => (
+          <PostCard
+            slug={post.id}
+            title={post.data.title}
+            description={post.data.description}
+            publishDate={post.data.publishDate}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .tag-page {
+    padding-top: clamp(104px, 12vw, 140px);
+    padding-bottom: clamp(3rem, 8vw, 5rem);
+  }
+  .tag-back {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .tag-back:hover, .tag-back:focus-visible { color: var(--fg); outline: none; }
+  .tag-head {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 1.25rem;
+  }
+  .tag-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 7vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    font-weight: 700;
+  }
+  .tag-sub { margin-top: 8px; color: var(--muted); font-size: 0.9rem; }
+</style>

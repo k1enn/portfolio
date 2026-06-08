@@ -6,6 +6,13 @@ export default defineConfig({
   integrations: [react()],
   devToolbar: { enabled: false },
   server: { host: true, port: 4321 },
+  markdown: {
+    shikiConfig: {
+      // Single dark theme — code panels read the same in light and dark mode.
+      theme: "github-dark",
+      wrap: true,
+    },
+  },
   build: {
     inlineStylesheets: "always",
   },

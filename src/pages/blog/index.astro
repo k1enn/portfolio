@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import PostCard from "../../components/PostCard.astro";
+
+// Drafts are hidden in production builds, shown in dev.
+const posts = (await getCollection("blog", ({ data }) =>
+  import.meta.env.PROD ? !data.draft : true
+)).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<Layout title="Writing — Trung Kien" description="Notes on back-end development, systems, and what I learn.">
+  <Navbar />
+  <main>
+    <section class="blog-index measure">
+      <header class="blog-head">
+        <h1 class="blog-title">Writing</h1>
+        <p class="blog-sub">Notes on back-end development, systems, and what I learn.</p>
+      </header>
+
+      {posts.length === 0 ? (
+        <p class="blog-empty">No posts yet. Check back soon.</p>
+      ) : (
+        <div class="blog-list">
+          {posts.map((post) => (
+            <PostCard
+              slug={post.id}
+              title={post.data.title}
+              description={post.data.description}
+              publishDate={post.data.publishDate}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      )}
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .blog-index {
+    padding-top: clamp(104px, 12vw, 140px);
+    padding-bottom: clamp(3rem, 8vw, 5rem);
+  }
+  .blog-head {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  .blog-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 7vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    font-weight: 700;
+  }
+  .blog-sub {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .blog-empty {
+    margin-top: 2rem;
+    color: var(--muted);
+  }
+</style>
