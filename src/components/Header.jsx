@@ -23,16 +23,13 @@ export default function Header() {
   return (
     <header id="home" role="banner" className="hero">
       <div className="container hero-inner">
-        <div className="hero-id">
-          <div className="hero-avatar" aria-hidden="true">TK</div>
-          <div className="hero-id-text">
-            <h1 className="hero-name">Trung Kien</h1>
-            <p className="hero-headline">Back-end Developer · Vietnam</p>
-          </div>
+        <div className="hero-id-text">
+          <h1 className="hero-name">Trung Kien</h1>
+          <p className="hero-headline">Full-stack Developer · Vietnam</p>
         </div>
 
         <p className="hero-bio">
-          Back-end developer from Vietnam. I build server-side systems,
+          Full-stack developer from Vietnam. I build server-side systems,
           ship small, and write about what I learn.
         </p>
 
