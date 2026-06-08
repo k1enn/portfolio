@@ -44,7 +44,7 @@ const img = item.image;
 const isVariant = !!img && img.startsWith("/images/") && img.endsWith(".webp");
 const base = isVariant ? img!.slice(0, -".webp".length) : "";
 const srcset = isVariant ? `${base}-400w.webp 400w, ${base}-800w.webp 800w, ${img} 1280w` : undefined;
-const sizes = srcset ? "(min-width: 720px) 680px, 100vw" : undefined;
+const sizes = srcset ? "(max-width: 480px) 220px, 150px" : undefined;
 const displaySrc = isVariant ? `${base}-400w.webp` : img;
 ---
 
@@ -77,31 +77,35 @@ const displaySrc = isVariant ? `${base}-400w.webp` : img;
 
     {item.org && <p class="tl-org">{item.org}</p>}
 
-    {displaySrc && (
-      <div class="tl-thumb-wrap">
-        <img
-          class="tl-thumb"
-          src={displaySrc}
-          srcset={srcset}
-          sizes={sizes}
-          alt={`${item.title} preview`}
-          loading="lazy"
-          decoding="async"
-          width="400"
-          height="225"
-        />
+    <div class="tl-body">
+      {displaySrc && (
+        <div class="tl-thumb-wrap">
+          <img
+            class="tl-thumb"
+            src={displaySrc}
+            srcset={srcset}
+            sizes={sizes}
+            alt={`${item.title} preview`}
+            loading="lazy"
+            decoding="async"
+            width="400"
+            height="225"
+          />
+        </div>
+      )}
+
+      <div class="tl-text">
+        <p class="tl-desc">{item.description}</p>
+
+        {item.tags && item.tags.length > 0 && (
+          <ul class="tl-tags">
+            {item.tags.map((tag) => (
+              <li class="tl-tag">{tag}</li>
+            ))}
+          </ul>
+        )}
       </div>
-    )}
-
-    <p class="tl-desc">{item.description}</p>
-
-    {item.tags && item.tags.length > 0 && (
-      <ul class="tl-tags">
-        {item.tags.map((tag) => (
-          <li class="tl-tag">{tag}</li>
-        ))}
-      </ul>
-    )}
+    </div>
   </div>
 </li>
 
@@ -185,9 +189,17 @@ const displaySrc = isVariant ? `${base}-400w.webp` : img;
     font-size: 0.9rem;
     color: var(--muted);
   }
-  .tl-thumb-wrap {
+  /* Media row: small thumbnail (projects) sits left of the text. */
+  .tl-body {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
     margin-top: 12px;
-    width: 100%;
+  }
+  .tl-text { flex: 1; min-width: 0; }
+  .tl-thumb-wrap {
+    flex: 0 0 150px;
+    width: 150px;
     aspect-ratio: 16 / 9;
     overflow: hidden;
     border: 2px solid var(--border);
@@ -200,7 +212,7 @@ const displaySrc = isVariant ? `${base}-400w.webp` : img;
     display: block;
   }
   .tl-desc {
-    margin-top: 12px;
+    margin-top: 0;
     font-size: 0.95rem;
     line-height: 1.55;
   }
@@ -211,6 +223,10 @@ const displaySrc = isVariant ? `${base}-400w.webp` : img;
     list-style: none;
     margin: 12px 0 0;
     padding: 0;
+  }
+  @media (max-width: 480px) {
+    .tl-body { flex-direction: column; }
+    .tl-thumb-wrap { flex-basis: auto; width: 100%; max-width: 220px; }
   }
   .tl-tag {
     font-size: 0.74rem;
