@@ -73,21 +73,6 @@ export default function Header() {
           border-bottom: 1px solid var(--line);
         }
         .hero-inner { display: flex; flex-direction: column; gap: 1.5rem; }
-        .hero-id { display: flex; align-items: center; gap: 18px; }
-        .hero-avatar {
-          width: 72px;
-          height: 72px;
-          flex-shrink: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border: 2px solid var(--border);
-          background: var(--surface);
-          font-family: var(--font-display);
-          font-weight: 700;
-          font-size: 1.6rem;
-          letter-spacing: -0.04em;
-        }
         .hero-name {
           font-family: var(--font-display);
           font-size: clamp(2rem, 6vw, 2.75rem);
