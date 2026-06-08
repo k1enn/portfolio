@@ -5,7 +5,8 @@ import Header from "../components/Header.jsx";
 import Technology from "../components/Technology.jsx";
 import SectionHeading from "../components/SectionHeading.astro";
 import Connect from "../components/Connect.astro";
-import TimelineFeed from "../components/TimelineFeed.astro";
+import ExperienceFeed from "../components/ExperienceFeed.astro";
+import ProjectsFeed from "../components/ProjectsFeed.astro";
 import RecentWriting from "../components/RecentWriting.astro";
 import Footer from "../components/Footer.astro";
 ---
@@ -15,13 +16,15 @@ import Footer from "../components/Footer.astro";
   <main>
     <Header />
 
-    <TimelineFeed />
+    <ExperienceFeed />
+
+    <ProjectsFeed />
 
     <RecentWriting />
 
     <section id="tech" aria-labelledby="tech-heading" class="tech-section">
       <div class="container">
-        <SectionHeading id="tech-heading" index={3}>Tech</SectionHeading>
+        <SectionHeading id="tech-heading" index={4}>Tech</SectionHeading>
         <Technology />
       </div>
     </section>

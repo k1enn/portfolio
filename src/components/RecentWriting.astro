@@ -13,7 +13,7 @@ const posts = (await getCollection("blog", ({ data }) =>
 {posts.length > 0 && (
   <section id="writing" aria-labelledby="writing-heading" class="writing-section">
     <div class="container">
-      <SectionHeading id="writing-heading" index={2}>Writing</SectionHeading>
+      <SectionHeading id="writing-heading" index={3}>Writing</SectionHeading>
 
       <ul class="writing-list">
         {posts.map((post) => (
@@ -44,7 +44,7 @@ const posts = (await getCollection("blog", ({ data }) =>
   .writing-section {
     padding-top: 3rem;
     padding-bottom: 3rem;
-    background: var(--bg);
+    background: var(--panel);
     border-top: 1px solid var(--line);
   }
   .writing-list {
