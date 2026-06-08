@@ -51,7 +51,6 @@ const displaySrc = isVariant ? `${base}-400w.webp` : img;
 <li
   class="tl-entry"
   data-type={item.type}
-  data-reveal="pending"
   data-tl-hidden={hidden ? "true" : undefined}
   data-tl-rail-end={railEnd ? "" : undefined}
 >
@@ -220,14 +219,5 @@ const displaySrc = isVariant ? `${base}-400w.webp` : img;
     border: 1px solid var(--muted);
     color: var(--muted);
     padding: 3px 8px;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .tl-entry[data-reveal="pending"] { opacity: 0; transform: translateY(10px); }
-    .tl-entry[data-reveal="in"] {
-      opacity: 1;
-      transform: none;
-      transition: opacity 0.45s ease, transform 0.45s ease;
-    }
   }
 </style>

@@ -58,26 +58,7 @@ const hasMore = items.length > initialCount;
 </section>
 
 <script>
-  // Progressive reveal: entries are visible by default (no-JS / reduced-motion safe).
-  // With JS + motion allowed, fade them in as they enter the viewport.
-  const entries = document.querySelectorAll<HTMLElement>('[data-timeline] [data-reveal]');
-  const motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
-
-  if (motionOk && 'IntersectionObserver' in window && entries.length) {
-    const io = new IntersectionObserver((records, obs) => {
-      for (const rec of records) {
-        if (rec.isIntersecting) {
-          (rec.target as HTMLElement).dataset.reveal = 'in';
-          obs.unobserve(rec.target);
-        }
-      }
-    }, { rootMargin: '0px 0px -10% 0px' });
-    entries.forEach((el) => io.observe(el));
-  } else {
-    entries.forEach((el) => el.removeAttribute('data-reveal'));
-  }
-
-  // Show More / Show Less toggle.
+  // Show More / Show Less: toggle display on the entries past the initial count.
   const feed = document.querySelector<HTMLElement>('[data-timeline]');
   const btn = document.querySelector<HTMLButtonElement>('[data-tl-more]');
   if (feed && btn) {
@@ -90,11 +71,7 @@ const hasMore = items.length > initialCount;
       const next = !expanded;
       btn.setAttribute('aria-expanded', String(next));
       rows.forEach((el, i) => {
-        if (i >= initial) {
-          el.toggleAttribute('data-tl-hidden', !next);
-          // Don't depend on the scroll observer for entries revealed by the button.
-          el.dataset.reveal = next ? 'in' : 'pending';
-        }
+        if (i >= initial) el.toggleAttribute('data-tl-hidden', !next);
         if (i === initial - 1) el.toggleAttribute('data-tl-rail-end', !next);
       });
       labelMore?.toggleAttribute('hidden', next);
