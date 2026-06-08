@@ -76,8 +76,8 @@ const hasMore = totalCount > initialCount;
 
 <style>
   .projects-section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     background: var(--bg);
     border-top: 1px solid var(--line);
   }
@@ -107,7 +107,7 @@ const hasMore = totalCount > initialCount;
   .projects-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
   .project-card-wrap[data-hidden="true"] {
     display: none;
@@ -135,7 +135,7 @@ const hasMore = totalCount > initialCount;
     outline: none;
   }
   @media (min-width: 768px) {
-    .projects-section { padding-top: 6rem; padding-bottom: 6rem; }
-    .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .projects-section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
   }
 </style>

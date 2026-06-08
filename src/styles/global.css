@@ -13,7 +13,7 @@
   --font-display: 'DM Sans', sans-serif;
   --font-mono: 'DM Sans', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --container-max: 1280px;
+  --container-max: 1120px;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -65,8 +65,8 @@ const SOCIAL_LINKS = [
 
 <style>
   .contact-section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     background: var(--bg);
     border-top: 1px solid var(--line);
   }
@@ -76,11 +76,11 @@ const SOCIAL_LINKS = [
     justify-content: space-between;
     gap: 16px;
     width: 100%;
-    padding: 20px;
+    padding: 18px;
     background: var(--bg);
     color: var(--fg);
     border: 2px solid var(--border);
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
     transition: background 120ms ease, color 120ms ease;
   }
   .email-cta:hover, .email-cta:focus-visible {
@@ -105,7 +105,7 @@ const SOCIAL_LINKS = [
   .email-cta:focus-visible .email-eyebrow { color: var(--bg); }
   .email-headline {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
     line-height: 0.95;
     letter-spacing: -0.04em;
     font-weight: 700;
@@ -128,11 +128,11 @@ const SOCIAL_LINKS = [
     letter-spacing: 0.1em;
   }
   @media (min-width: 640px) {
-    .email-cta { padding: 28px 32px; }
+    .email-cta { padding: 24px 28px; }
     .email-icon { font-size: 44px; }
   }
   @media (min-width: 768px) {
-    .email-cta { padding: 36px 40px; margin-bottom: 2.5rem; }
+    .email-cta { padding: 28px 32px; margin-bottom: 2rem; }
     .email-icon { font-size: 52px; }
   }
 
@@ -166,8 +166,8 @@ const SOCIAL_LINKS = [
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
-    padding: 16px;
-    min-height: 140px;
+    padding: 14px;
+    min-height: 112px;
     background: var(--surface);
     color: var(--fg);
     border-right: 1px solid var(--line);
@@ -208,12 +208,12 @@ const SOCIAL_LINKS = [
   .contact-card:focus-visible .contact-handle { color: var(--fg); }
   @media (min-width: 640px) {
     .contact-grid { grid-template-columns: repeat(3, 1fr); }
-    .contact-card { padding: 20px; min-height: 160px; }
+    .contact-card { padding: 18px; min-height: 128px; }
     .contact-icon { font-size: 32px; }
     .contact-label { font-size: 1.1rem; }
   }
   @media (min-width: 768px) {
-    .contact-section { padding-top: 6rem; padding-bottom: 6rem; }
+    .contact-section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
     .contact-grid { grid-template-columns: repeat(4, 1fr); }
   }
 </style>

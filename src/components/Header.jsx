@@ -44,16 +44,16 @@ export default function Header() {
 
       <style>{`
         .hero {
-          min-height: 100dvh;
+          min-height: 82vh;
           background: var(--bg);
           color: var(--fg);
-          padding-top: clamp(120px, 14vw, 160px);
-          padding-bottom: clamp(4rem, 8vw, 6rem);
+          padding-top: clamp(96px, 10vw, 128px);
+          padding-bottom: clamp(3rem, 6vw, 4.5rem);
           border-bottom: 1px solid var(--line);
           display: flex;
           align-items: center;
         }
-        .hero-inner { display: flex; flex-direction: column; gap: 2rem; }
+        .hero-inner { display: flex; flex-direction: column; gap: 1.5rem; }
         .hero-tag {
           display: inline-flex;
           align-items: center;
@@ -71,7 +71,7 @@ export default function Header() {
         }
         .hero-title {
           font-family: var(--font-display);
-          font-size: clamp(3.5rem, 14vw, 9rem);
+          font-size: clamp(3rem, 10vw, 6rem);
           line-height: 0.9;
           letter-spacing: -0.06em;
           font-weight: 700;
