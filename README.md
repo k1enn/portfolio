@@ -19,33 +19,58 @@ npm run build     # outputs dist/
 npm run preview   # serve dist/
 ```
 
+## Layout
+
+Narrow single-column "cactus" shell (~720px). Home is one scroll: hero → combined
+career timeline (work + education + projects, newest first) → recent writing → tech →
+connect → footer. Blog lives on its own routes.
+
 ## Routes
 
-- `/` — home (hero, tech carousel, connect, featured projects, footer)
-- `/projects` — all projects grid
+- `/` — home (hero, timeline, recent writing, tech, connect, footer)
+- `/blog` — all posts
+- `/blog/[slug]` — a post
+- `/tags/[tag]` — posts filtered by tag
+- `/rss.xml` — RSS feed
 
 ## Structure
 
 ```
 src/
-  layouts/Layout.astro     shared head + global CSS
+  layouts/
+    Layout.astro           shared head + global CSS
+    BlogPost.astro         blog post layout (prose)
   pages/
     index.astro            home route
-    projects.astro         all-projects route
+    blog/index.astro       post list
+    blog/[...slug].astro   post pages
+    tags/[tag].astro       tag pages
+    rss.xml.js             RSS feed
   components/
     *.astro                pure static Astro components
     *.jsx                  React islands (client:load)
-  data/projects.json       project list
-  styles/                  global stylesheets
+  content/blog/*.md        blog posts (content collection)
+  content.config.ts        collection schema
+  data/timeline.json       combined timeline entries
+  data/technologies.json   tech list
+  utils/slugify.ts         tag -> slug
+  styles/                  global + prose stylesheets
 ```
 
 ## Islands (React, client:load)
 
-Header, Overlay, Navbar, Technology, ScrollToTop, Loading — anything that uses `window`, scroll listeners, `requestAnimationFrame`, or mount-time state.
+Header, Technology — anything that uses `window`, scroll listeners, or mount-time state.
 
 ## Static Astro components
 
-Footer, Connect, Projects, ProjectCard, SectionHeading — pure SSR, scroll-in animations via CSS + IntersectionObserver utility.
+Footer, Connect, TimelineFeed, TimelineEntry, RecentWriting, PostCard, SectionHeading,
+Navbar — pure SSR; timeline reveal via a small inline IntersectionObserver (visible by
+default, reduced-motion safe).
+
+## Design tokens (frozen)
+
+Monochrome palette + DM Sans. One exception: `--font-code` (real monospace) for blog
+code blocks only.
 
 ## Deploy
 
