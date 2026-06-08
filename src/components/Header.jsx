@@ -1,8 +1,8 @@
-import { FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa";
-import { SiCodeforces } from "react-icons/si";
+import { SOCIAL_ICONS } from "../utils/social-icons.jsx";
+import profile from "../data/profile.json";
 
-const START = new Date("2023-08-01").getTime();
-const END = new Date("2027-08-01").getTime();
+const START = new Date(profile.graduation.start).getTime();
+const END = new Date(profile.graduation.end).getTime();
 
 function gradProgress() {
   const total = END - START;
@@ -10,12 +10,11 @@ function gradProgress() {
   return Math.min(Math.max((elapsed / total) * 100, 0), 100);
 }
 
-const SOCIALS = [
-  { url: "https://github.com/k1enn", Icon: FaGithub, label: "GitHub" },
-  { url: "https://linkedin.com/in/k1enn", Icon: FaLinkedin, label: "LinkedIn" },
-  { url: "https://www.youtube.com/@iamk1en", Icon: FaYoutube, label: "YouTube" },
-  { url: "https://codeforces.com/profile/dinhtrungkien", Icon: SiCodeforces, label: "Codeforces" },
-];
+// "2023-08-01" -> "2023.08"
+const ym = (iso) => {
+  const [y, m] = iso.split("-");
+  return `${y}.${m}`;
+};
 
 export default function Header() {
   const progress = gradProgress();
@@ -24,29 +23,29 @@ export default function Header() {
     <header id="home" role="banner" className="hero">
       <div className="container hero-inner">
         <div className="hero-id-text">
-          <h1 className="hero-name">Trung Kien</h1>
-          <p className="hero-headline">Full-stack Developer · Vietnam</p>
+          <h1 className="hero-name">{profile.name}</h1>
+          <p className="hero-headline">{profile.headline}</p>
         </div>
 
-        <p className="hero-bio">
-          Full-stack developer from Vietnam. I build server-side systems,
-          ship small, and write about what I learn.
-        </p>
+        <p className="hero-bio">{profile.bio}</p>
 
         <ul className="hero-socials">
-          {SOCIALS.map(({ url, Icon, label }) => (
-            <li key={label}>
-              <a
-                className="hero-social"
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${label} (opens in new tab)`}
-              >
-                <Icon aria-hidden="true" />
-              </a>
-            </li>
-          ))}
+          {profile.socials.map((s) => {
+            const Icon = SOCIAL_ICONS[s.icon];
+            return (
+              <li key={s.key}>
+                <a
+                  className="hero-social"
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${s.label} (opens in new tab)`}
+                >
+                  {Icon && <Icon aria-hidden="true" />}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="hero-progress" aria-label={`Road to graduation ${progress.toFixed(0)} percent`}>
@@ -58,8 +57,8 @@ export default function Header() {
             <div className="hero-bar-fill" style={{ width: `${progress}%` }} />
           </div>
           <div className="hero-progress-row hero-progress-meta">
-            <span>2023.08</span>
-            <span>2027.08</span>
+            <span>{ym(profile.graduation.start)}</span>
+            <span>{ym(profile.graduation.end)}</span>
           </div>
         </div>
       </div>

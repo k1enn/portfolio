@@ -1,12 +1,11 @@
 ---
-import { FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { SOCIAL_ICONS } from "../utils/social-icons.jsx";
+import profile from "../data/profile.json";
 
 const YEAR = new Date().getFullYear();
-const SOCIALS = [
-  { url: "https://github.com/k1enn", Icon: FaGithub, label: "GitHub" },
-  { url: "https://linkedin.com/in/k1enn", Icon: FaLinkedin, label: "LinkedIn" },
-  { url: "https://www.youtube.com/@iamk1en", Icon: FaYoutube, label: "YouTube" },
-];
+const SOCIALS = profile.socials
+  .filter((s) => s.footer)
+  .map((s) => ({ ...s, Icon: SOCIAL_ICONS[s.icon] }));
 ---
 
 <footer class="site-footer">
@@ -20,7 +19,7 @@ const SOCIALS = [
     </section>
 
     <div class="footer-meta">
-      <span class="footer-copy">Trung Kien · © {YEAR}</span>
+      <span class="footer-copy">{profile.name} · © {YEAR}</span>
       <ul class="footer-socials">
         {SOCIALS.map(({ url, Icon, label }) => (
           <li>

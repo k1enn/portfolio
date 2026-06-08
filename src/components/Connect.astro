@@ -1,16 +1,10 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
-import { FaLinkedin, FaGithub, FaYoutube, FaDiscord, FaFacebook, FaRegEnvelope } from "react-icons/fa";
-import { SiCodeforces, SiLeetcode } from "react-icons/si";
+import { SOCIAL_ICONS } from "../utils/social-icons.jsx";
+import profile from "../data/profile.json";
 
-const EMAIL = "dinhtrungkien05@gmail.com";
-
-const SOCIAL_LINKS = [
-  { url: "https://linkedin.com/in/k1enn", Icon: FaLinkedin, label: "LinkedIn", handle: "@k1enn" },
-  { url: "https://www.github.com/k1enn", Icon: FaGithub, label: "GitHub", handle: "@k1enn" },
-  { url: "https://www.youtube.com/@iamk1en", Icon: FaYoutube, label: "YouTube", handle: "@iamk1en" },
-  { url: "https://codeforces.com/profile/dinhtrungkien", Icon: SiCodeforces, label: "Codeforces", handle: "dinhtrungkien" },
-];
+const EMAIL = profile.email;
+const SOCIAL_LINKS = profile.socials.map((s) => ({ ...s, Icon: SOCIAL_ICONS[s.icon] }));
 ---
 
 <section id="contact" aria-labelledby="contact-heading" class="contact-section">
@@ -19,8 +13,8 @@ const SOCIAL_LINKS = [
 
     <a
       class="email-cta"
-      href={`mailto:${EMAIL}?subject=Hello%20Trung%20Kien`}
-      aria-label={`Email Trung Kien at ${EMAIL}`}
+      href={`mailto:${EMAIL}?subject=${encodeURIComponent(`Hello ${profile.name}`)}`}
+      aria-label={`Email ${profile.name} at ${EMAIL}`}
     >
       <div class="email-cta-left">
         <span class="email-eyebrow">Direct · Best for work</span>
