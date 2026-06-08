@@ -1,0 +1,105 @@
+[
+  {
+    "type": "work",
+    "title": "Full-Stack Developer",
+    "org": "CTLD",
+    "start": "2024-01",
+    "end": "present",
+    "description": "Build internal management systems (HR, seller finance, designer tools) for the company. Led a small team of fresher developers and set up CI/CD on Cloudflare.",
+    "tags": ["NextJS", "ElysiaJS", "DrizzleORM", "Cloudflare", "Team Lead"],
+    "link": "https://www.ctld.site/"
+  },
+  {
+    "type": "education",
+    "title": "B.Sc. Computer Science",
+    "org": "University",
+    "start": "2023-08",
+    "end": "present",
+    "description": "Computer Science major (expected 2027). Focused on back-end systems, algorithms, and competitive programming.",
+    "tags": ["CS", "Algorithms", "Back-End"]
+  },
+  {
+    "type": "project",
+    "title": "human-resource-management",
+    "org": "CTLD",
+    "start": "2025-03",
+    "description": "A human resource management system built with Next.js, featuring employee management, attendance tracking, and performance evaluation functionalities.",
+    "image": "/images/hrm.webp",
+    "link": "https://www.ctld.site/",
+    "tags": ["NextJS", "DrizzleORM", "ElysiaJS", "Cloudflare", "CI/CD"]
+  },
+  {
+    "type": "project",
+    "title": "Hilu Learn",
+    "start": "2025-01",
+    "description": "Prototype of blockchain e-learning platform featuring course management, quizzes, XP/leveling system, project collaboration, and real-time leaderboards. Built with Next.js 15 and Supabase.",
+    "image": "/images/hilu.webp",
+    "link": "https://hilu-learn-agy.pages.dev/",
+    "tags": ["NFT", "Blockchain", "Solana", "NextJS", "Supabase"]
+  },
+  {
+    "type": "project",
+    "title": "QuanLySellerCTLD",
+    "org": "CTLD",
+    "start": "2024-09",
+    "description": "As team leader with four fresher developers, I built this project to help the company manage its money flow. Track and manage financial transactions, generate reports, and gain insights into the company's financial health.",
+    "image": "/images/quan-ly-seller.webp",
+    "link": "https://quan-ly-seller-ctld-frontend.pages.dev",
+    "tags": ["NextJS", "Cloudflare", "CI/CD", "Team Work"]
+  },
+  {
+    "type": "project",
+    "title": "software-engineer-notes",
+    "start": "2024-06",
+    "description": "Sharing notes for CS major.",
+    "image": "/images/software-engineer-note.webp",
+    "link": "https://github.com/k1enn/software-engineer-notes",
+    "tags": ["Documentation", "Educational", "CS"]
+  },
+  {
+    "type": "project",
+    "title": "BoysCoffee",
+    "start": "2024-03",
+    "description": "A web application for browsing, selecting, and ordering beverages from anywhere.",
+    "image": "/images/web_1.webp",
+    "link": "https://github.com/k1enn/Ca-Phe-Boys",
+    "tags": ["Web App", "E-Commerce", "Fullstack"]
+  },
+  {
+    "type": "project",
+    "title": "levents_shop",
+    "start": "2023-11",
+    "description": "A full-stack e-commerce application built with MongoDB, Express.js, React.js, and Node.js featuring comprehensive admin functionality and order management.",
+    "image": "/images/levents-user-view.webp",
+    "link": "https://github.com/k1enn/levents_shop",
+    "tags": ["Fullstack", "E-Commerce"]
+  },
+  {
+    "type": "project",
+    "title": "elsa-speak-clone",
+    "start": "2023-09",
+    "description": "A comprehensive Android application designed to help users learn English through interactive lessons, pronunciation practice, quizzes, and more.",
+    "image": "/images/elsa-speak-clone.webp",
+    "link": "https://github.com/k1enn/elsa-speak-clone",
+    "tags": ["Mobile", "Android", "Education", "AI Agent"]
+  },
+  {
+    "type": "project",
+    "title": "barbie-thrift-tool",
+    "start": "2023-07",
+    "description": "A responsive tool for documenting apparel details with dynamic output generation.",
+    "image": "/images/barbie-thrift-tools.webp",
+    "link": "https://github.com/k1enn/Outfit-Template-Maker",
+    "tags": ["Tool", "Frontend", "Responsive", "Javascript"]
+  },
+  {
+    "type": "project",
+    "title": "QuanLyDesignerCTLD",
+    "org": "CTLD",
+    "start": "2023-05",
+    "description": "My first actual project, built for my company to manage clothing templates. Create, edit, and organize clothing templates with a user-friendly interface.",
+    "image": "/images/quan-ly-designer.webp",
+    "link": "https://quan-ly-designer-ctld-frontend-etb.pages.dev/",
+    "tags": ["Frontend", "Responsive", "Javascript"]
+  }
+]
