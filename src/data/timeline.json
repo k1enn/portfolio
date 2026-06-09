@@ -1,28 +1,30 @@
 [
   {
     "type": "work",
-    "title": "Full-Stack Developer",
+    "title": "Team Lead",
     "org": "CTLD",
-    "start": "2024-01",
+    "start": "2025-08",
     "end": "present",
     "description": "Build internal management systems (HR, seller finance, designer tools) for the company. Led a small team of fresher developers and set up CI/CD on Cloudflare.",
     "tags": ["NextJS", "ElysiaJS", "DrizzleORM", "Cloudflare", "Team Lead"],
-    "link": "https://www.ctld.site/"
+    "link": ""
   },
   {
     "type": "education",
-    "title": "B.Sc. Computer Science",
-    "org": "University",
+    "title": "B.Sc. Software Engineering",
+    "org": "Ho Chi Minh City University of Foreign Languages - Information Technology (HUFLIT)",
     "start": "2023-08",
     "end": "present",
-    "description": "Computer Science major (expected 2027). Focused on back-end systems, algorithms, and competitive programming.",
-    "tags": ["CS", "Algorithms", "Back-End"]
+    "description": "Software Engineering major (expected 2027).",
+    "tags": ["CS", "Algorithms", "Software Engineering"],
+    "link": "https://huflit.edu.vn/"
   },
   {
     "type": "project",
     "title": "human-resource-management",
     "org": "CTLD",
-    "start": "2025-03",
+    "start": "2026-03",
+    "end": "present",
     "description": "A human resource management system built with Next.js, featuring employee management, attendance tracking, and performance evaluation functionalities.",
     "image": "/images/hrm.webp",
     "link": "https://www.ctld.site/",
@@ -31,7 +33,8 @@
   {
     "type": "project",
     "title": "Hilu Learn",
-    "start": "2025-01",
+    "start": "2026-1",
+    "end": "2026-4",
     "description": "Prototype of blockchain e-learning platform featuring course management, quizzes, XP/leveling system, project collaboration, and real-time leaderboards. Built with Next.js 15 and Supabase.",
     "image": "/images/hilu.webp",
     "link": "https://hilu-learn-agy.pages.dev/",
@@ -41,7 +44,8 @@
     "type": "project",
     "title": "QuanLySellerCTLD",
     "org": "CTLD",
-    "start": "2024-09",
+    "start": "2025-10",
+    "end": "present",
     "description": "As team leader with four fresher developers, I built this project to help the company manage its money flow. Track and manage financial transactions, generate reports, and gain insights into the company's financial health.",
     "image": "/images/quan-ly-seller.webp",
     "link": "https://quan-ly-seller-ctld-frontend.pages.dev",
@@ -49,13 +53,16 @@
   },
   {
     "type": "project",
-    "title": "software-engineer-notes",
-    "start": "2024-06",
-    "description": "Sharing notes for CS major.",
-    "image": "/images/software-engineer-note.webp",
-    "link": "https://github.com/k1enn/software-engineer-notes",
-    "tags": ["Documentation", "Educational", "CS"]
+    "title": "QuanLyDesignerCTLD",
+    "org": "CTLD",
+    "start": "2025-09",
+    "end": "present",
+    "description": "My first actual project, built for my company to manage clothing templates. Create, edit, and organize clothing templates with a user-friendly interface.",
+    "image": "/images/quan-ly-designer.webp",
+    "link": "https://quan-ly-designer-ctld-frontend-etb.pages.dev/",
+    "tags": ["Frontend", "Responsive", "Javascript"]
   },
+
   {
     "type": "project",
     "title": "BoysCoffee",
@@ -83,6 +90,7 @@
     "link": "https://github.com/k1enn/elsa-speak-clone",
     "tags": ["Mobile", "Android", "Education", "AI Agent"]
   },
+
   {
     "type": "project",
     "title": "barbie-thrift-tool",
@@ -94,12 +102,12 @@
   },
   {
     "type": "project",
-    "title": "QuanLyDesignerCTLD",
-    "org": "CTLD",
-    "start": "2023-05",
-    "description": "My first actual project, built for my company to manage clothing templates. Create, edit, and organize clothing templates with a user-friendly interface.",
-    "image": "/images/quan-ly-designer.webp",
-    "link": "https://quan-ly-designer-ctld-frontend-etb.pages.dev/",
-    "tags": ["Frontend", "Responsive", "Javascript"]
+    "title": "software-engineer-notes",
+    "start": "2024-06",
+    "end": "present",
+    "description": "Sharing notes for CS major.",
+    "image": "/images/software-engineer-note.webp",
+    "link": "https://github.com/k1enn/software-engineer-notes",
+    "tags": ["Documentation", "Educational", "CS"]
   }
 ]
