@@ -1,3 +1,13 @@
+---
+import { SOCIAL_ICONS } from "../utils/social-icons.jsx";
+import profile from "../data/profile.json";
+
+const YEAR = new Date().getFullYear();
+const SOCIALS = profile.socials
+  .filter((s) => s.footer)
+  .map((s) => ({ ...s, Icon: SOCIAL_ICONS[s.icon] }));
+---
+
 <footer class="site-footer">
   <div class="container footer-inner">
     <section class="footer-game-wrap" aria-label="Dinosaur game">
@@ -7,6 +17,26 @@
         </div>
       </div>
     </section>
+
+    <div class="footer-meta">
+      <span class="footer-copy">{profile.name} · © {YEAR}</span>
+      <ul class="footer-socials">
+        {SOCIALS.map(({ url, Icon, label }) => (
+          <li>
+            <a
+              class="footer-social"
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${label} (opens in new tab)`}
+            >
+              <Icon aria-hidden="true" />
+            </a>
+          </li>
+        ))}
+      </ul>
+      <span class="footer-built">Built with Astro</span>
+    </div>
   </div>
 
   <img id="offline-resources-1x" src="/trex/sprite-1x.png" alt="" hidden aria-hidden="true" />
@@ -62,12 +92,53 @@
   .site-footer {
     background: var(--bg);
     color: var(--fg);
-    border-top: 2px solid var(--border);
+    border-top: 1px solid var(--line);
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
   .footer-game-wrap {
     padding-top: 0.5rem;
+  }
+  .footer-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+  .footer-copy { color: var(--muted-strong); font-weight: 500; }
+  .footer-built { margin-left: auto; }
+  .footer-socials {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .footer-social {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--border);
+    color: var(--fg);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .footer-social:hover,
+  .footer-social:focus-visible {
+    background: var(--fg);
+    color: var(--bg);
+    outline: none;
+  }
+  .footer-social svg { width: 16px; height: 16px; }
+  @media (max-width: 480px) {
+    .footer-built { margin-left: 0; width: 100%; }
   }
   .interstitial-wrapper {
     width: 100%;

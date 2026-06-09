@@ -1,0 +1,116 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import TimelineEntry from "./TimelineEntry.astro";
+import type { TimelineItem } from "./TimelineEntry.astro";
+import timelineData from "../data/timeline.json";
+
+// Projects only, newest-first. Same timeline layout as Experience.
+const items = (timelineData as TimelineItem[])
+  .filter((i) => i.type === "project")
+  .sort((a, b) => (b.end || b.start).localeCompare(a.end || a.start));
+
+const initialCount = 6;
+const hasMore = items.length > initialCount;
+---
+
+<section id="projects" aria-labelledby="projects-heading" class="projects-section">
+  <div class="container">
+    <SectionHeading id="projects-heading" index={2}>Projects</SectionHeading>
+
+    <p class="projects-sub">Selected builds — {String(items.length).padStart(2, "0")} total.</p>
+
+    <ol class="timeline" data-projects data-initial-count={initialCount}>
+      {items.map((item, i) => (
+        <TimelineEntry
+          item={item}
+          hidden={hasMore && i >= initialCount}
+          railEnd={hasMore && i === initialCount - 1}
+        />
+      ))}
+    </ol>
+
+    {hasMore && (
+      <div class="projects-actions">
+        <button
+          type="button"
+          class="projects-more-btn"
+          data-proj-more
+          aria-expanded="false"
+          aria-controls="projects"
+        >
+          <span data-label-more>Show More ({items.length - initialCount})</span>
+          <span data-label-less hidden>Show Less</span>
+        </button>
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  // Show More / Show Less: toggle the entries past the initial count.
+  const feed = document.querySelector<HTMLElement>('[data-projects]');
+  const btn = document.querySelector<HTMLButtonElement>('[data-proj-more]');
+  if (feed && btn) {
+    const initial = Number(feed.dataset.initialCount) || 6;
+    const rows = Array.from(feed.querySelectorAll<HTMLElement>('.tl-entry'));
+    const labelMore = btn.querySelector<HTMLElement>('[data-label-more]');
+    const labelLess = btn.querySelector<HTMLElement>('[data-label-less]');
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const next = !expanded;
+      btn.setAttribute('aria-expanded', String(next));
+      rows.forEach((el, i) => {
+        if (i >= initial) el.toggleAttribute('data-tl-hidden', !next);
+        if (i === initial - 1) el.toggleAttribute('data-tl-rail-end', !next);
+      });
+      labelMore?.toggleAttribute('hidden', next);
+      labelLess?.toggleAttribute('hidden', !next);
+      if (!next) feed.closest('section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+</script>
+
+<style>
+  .projects-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+  }
+  .projects-sub {
+    margin-bottom: 1.75rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .projects-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  .projects-more-btn {
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 12px 26px;
+    background: var(--surface);
+    color: var(--fg);
+    border: 2px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .projects-more-btn:hover,
+  .projects-more-btn:focus-visible {
+    background: var(--surface-hover);
+    outline: none;
+  }
+  @media (min-width: 768px) {
+    .projects-section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+  }
+</style>

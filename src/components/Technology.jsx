@@ -46,125 +46,127 @@ const ICONS = {
   DiMsqlServer,
 };
 
-const COLS = 4;
 const pad2 = (n) => String(n).padStart(2, "0");
-const padItems = (items) => {
-  const need = (COLS - (items.length % COLS)) % COLS;
-  return [...items, ...Array(need).fill(null)];
-};
+
+function TechIcon({ name }) {
+  if (name === "IconifyElysia") {
+    return (
+      <>
+        <img
+          className="tech-pill-icon tech-pill-icon--img tech-elysia-light"
+          src="https://api.iconify.design/skill-icons:elysia-light.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          className="tech-pill-icon tech-pill-icon--img tech-elysia-dark"
+          src="https://api.iconify.design/skill-icons:elysia-dark.svg"
+          alt=""
+          aria-hidden="true"
+        />
+      </>
+    );
+  }
+  const Icon = ICONS[name];
+  return Icon ? <Icon className="tech-pill-icon" aria-hidden="true" /> : null;
+}
 
 export default function Technology() {
   return (
     <div className="tech-wrap">
-      {categories.map((cat) => {
-        const cells = padItems(cat.items);
-        return (
-          <section key={cat.label} className="tech-section">
-            <header className="tech-head">
-              <span className="tech-head-label">{cat.label}</span>
-              <span className="tech-head-count">[{pad2(cat.items.length)}]</span>
-            </header>
-            <div className="tech-grid">
-              {cells.map((tech, i) => {
-                if (!tech) {
-                  return <div key={`pad-${i}`} className="tech-cell tech-cell--empty" aria-hidden="true" />;
-                }
-                const Tag = tech.link ? "a" : "div";
-                const tagProps = tech.link
-                  ? {
-                      href: tech.link,
-                      target: "_blank",
-                      rel: "noopener noreferrer",
-                      "aria-label": tech.name,
-                    }
-                  : {};
-                const inner = tech.icon === "IconifyElysia" ? (
-                  <>
-                    <img
-                      className="tech-icon tech-icon--img tech-elysia-light"
-                      src="https://api.iconify.design/skill-icons:elysia-light.svg"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <img
-                      className="tech-icon tech-icon--img tech-elysia-dark"
-                      src="https://api.iconify.design/skill-icons:elysia-dark.svg"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                  </>
-                ) : (
-                  (() => {
-                    const Icon = ICONS[tech.icon];
-                    return Icon ? <Icon className="tech-icon" aria-hidden="true" /> : null;
-                  })()
-                );
-                return (
-                  <Tag key={`${cat.label}-${tech.name}`} className="tech-cell" {...tagProps}>
-                    {inner}
-                    <span className="tech-name">{tech.name}</span>
+      {categories.map((cat) => (
+        <section key={cat.label} className="tech-cat">
+          <header className="tech-head">
+            <span className="tech-head-label">{cat.label}</span>
+            <span className="tech-head-count">[{pad2(cat.items.length)}]</span>
+          </header>
+          <ul className="tech-pills">
+            {cat.items.map((tech) => {
+              const Tag = tech.link ? "a" : "span";
+              const tagProps = tech.link
+                ? {
+                    href: tech.link,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    "aria-label": `${tech.name} (opens in new tab)`,
+                  }
+                : {};
+              return (
+                <li key={`${cat.label}-${tech.name}`} className="tech-pill-item">
+                  <Tag className="tech-pill" {...tagProps}>
+                    <TechIcon name={tech.icon} />
+                    <span className="tech-pill-name">{tech.name}</span>
                   </Tag>
-                );
-              })}
-            </div>
-          </section>
-        );
-      })}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
       <style>{`
         .tech-wrap {
-          margin-top: 2rem;
-          border: 2px solid var(--border);
-          background: var(--bg);
-        }
-        .tech-section + .tech-section {
-          border-top: 2px solid var(--border);
+          margin-top: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.75rem;
         }
         .tech-head {
           display: flex;
-          align-items: center;
+          align-items: baseline;
           justify-content: space-between;
-          padding: 10px 14px;
-          background: var(--fg);
-          color: var(--bg);
+          gap: 12px;
+          padding-bottom: 10px;
+          margin-bottom: 14px;
           border-bottom: 2px solid var(--border);
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
+          color: var(--fg);
+          letter-spacing: 0.02em;
         }
         .tech-head-label {
+          font-family: var(--font-display);
           font-weight: 700;
-          font-size: 0.9rem;
+          font-size: 1.05rem;
+          letter-spacing: -0.01em;
         }
         .tech-head-count {
           font-family: var(--font-display);
           font-size: 0.95rem;
           font-weight: 700;
+          color: var(--muted-strong);
         }
-        .tech-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 2px;
-          background: var(--border);
-        }
-        .tech-cell {
+        .tech-pills {
           display: flex;
-          flex-direction: column;
+          flex-wrap: wrap;
+          gap: 10px;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+        .tech-pill-item { margin: 0; }
+        .tech-pill {
+          display: inline-flex;
           align-items: center;
-          justify-content: center;
-          padding: 22px 12px;
-          min-height: 112px;
-          background: var(--bg);
+          gap: 9px;
+          padding: 9px 14px;
+          background: transparent;
           color: var(--fg);
+          border: 1.5px solid var(--border);
           text-decoration: none;
+          line-height: 1;
           transition: background 0.15s ease, color 0.15s ease;
         }
-        a.tech-cell { cursor: pointer; }
-        a.tech-cell:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; }
-        .tech-cell:not(.tech-cell--empty):hover {
+        a.tech-pill { cursor: pointer; }
+        a.tech-pill:hover,
+        a.tech-pill:focus-visible {
           background: var(--fg);
           color: var(--bg);
+          outline: none;
         }
-        .tech-icon { font-size: 30px; margin-bottom: 10px; }
-        .tech-icon--img { width: 30px; height: 30px; object-fit: contain; display: block; }
+        a.tech-pill:focus-visible { outline: 3px solid var(--fg); outline-offset: 2px; }
+        .tech-pill-icon { font-size: 20px; flex-shrink: 0; }
+        .tech-pill-icon--img { width: 20px; height: 20px; object-fit: contain; display: block; }
+        /* Invert the Elysia bitmap on pill hover so it reads on the dark fill. */
+        a.tech-pill:hover .tech-pill-icon--img,
+        a.tech-pill:focus-visible .tech-pill-icon--img { filter: invert(1); }
         .tech-elysia-dark { display: none; }
         @media (prefers-color-scheme: dark) {
           :root:not([data-theme="light"]) .tech-elysia-light { display: none; }
@@ -174,22 +176,18 @@ export default function Technology() {
         :root[data-theme="dark"] .tech-elysia-dark { display: block; }
         :root[data-theme="light"] .tech-elysia-light { display: block; }
         :root[data-theme="light"] .tech-elysia-dark { display: none; }
-        .tech-name {
-          font-size: 0.76rem;
+        .tech-pill-name {
+          font-size: 0.88rem;
           font-weight: 500;
-          text-align: center;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          padding: 0 4px;
+          letter-spacing: 0.01em;
         }
         @media (min-width: 768px) {
-          .tech-grid { grid-template-columns: repeat(4, 1fr); }
-          .tech-cell { min-height: 128px; padding: 26px 14px; }
-          .tech-icon { font-size: 38px; }
-          .tech-icon--img { width: 38px; height: 38px; }
-          .tech-head { padding: 12px 18px; }
-          .tech-head-label { font-size: 1rem; }
+          .tech-head-label { font-size: 1.15rem; }
           .tech-head-count { font-size: 1.05rem; }
+          .tech-pill { padding: 10px 16px; }
+          .tech-pill-icon { font-size: 22px; }
+          .tech-pill-icon--img { width: 22px; height: 22px; }
+          .tech-pill-name { font-size: 0.92rem; }
         }
       `}</style>
     </div>

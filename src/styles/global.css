@@ -2,38 +2,61 @@
   color-scheme: light dark;
 
   --bg: #f0f0f0;
+  --surface: #ffffff;
+  --surface-hover: #e6e6e6;
   --fg: #1a1a1a;
-  --muted: #5a5a5a;
+  --muted: #525252;
+  --muted-strong: #3a3a3a;
   --border: #1a1a1a;
+  --line: #d4d4d4;
+  --panel: #e9e9e9;
 
   --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-display: 'DM Sans', sans-serif;
   --font-mono: 'DM Sans', ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Real monospace — used only for blog code (`<code>`/`<pre>`). */
+  --font-code: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
-  --container-max: 1280px;
+  --container-max: 720px;
+  --measure: 680px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0a0a0a;
+    --surface: #151515;
+    --surface-hover: #1e1e1e;
     --fg: #e0e0e0;
-    --muted: #8a8a8a;
+    --muted: #a8a8a8;
+    --muted-strong: #c2c2c2;
     --border: #e0e0e0;
+    --line: #2a2a2a;
+    --panel: #0f0f0f;
   }
 }
 
 :root[data-theme="dark"] {
   --bg: #0a0a0a;
+  --surface: #151515;
+  --surface-hover: #1e1e1e;
   --fg: #e0e0e0;
-  --muted: #8a8a8a;
+  --muted: #a8a8a8;
+  --muted-strong: #c2c2c2;
   --border: #e0e0e0;
+  --line: #2a2a2a;
+  --panel: #0f0f0f;
 }
 
 :root[data-theme="light"] {
   --bg: #f0f0f0;
+  --surface: #ffffff;
+  --surface-hover: #e6e6e6;
   --fg: #1a1a1a;
-  --muted: #5a5a5a;
+  --muted: #525252;
+  --muted-strong: #3a3a3a;
   --border: #1a1a1a;
+  --line: #d4d4d4;
+  --panel: #e9e9e9;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -77,8 +100,8 @@ button {
 ::selection { background: var(--fg); color: var(--bg); }
 
 ::-webkit-scrollbar { width: 12px; height: 12px; }
-::-webkit-scrollbar-track { background: var(--bg); border-left: 2px solid var(--border); }
-::-webkit-scrollbar-thumb { background: var(--fg); border-radius: 0; }
+::-webkit-scrollbar-track { background: var(--bg); border-left: 1px solid var(--line); }
+::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 0; }
 
 .container {
   width: 100%;
@@ -88,6 +111,17 @@ button {
 }
 @media (min-width: 640px) {
   .container { padding: 0 2rem; }
+}
+
+/* Narrow reading column for long-form content (blog prose, etc.) */
+.measure {
+  width: 100%;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+@media (min-width: 640px) {
+  .measure { padding: 0 2rem; }
 }
 
 .skip-link {

@@ -1,0 +1,110 @@
+---
+import { getCollection } from "astro:content";
+import SectionHeading from "./SectionHeading.astro";
+
+// 3 newest posts (drafts hidden in prod). Section self-hides when there are none.
+const posts = (await getCollection("blog", ({ data }) =>
+  import.meta.env.PROD ? !data.draft : true
+))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
+---
+
+{posts.length > 0 && (
+  <section id="writing" aria-labelledby="writing-heading" class="writing-section">
+    <div class="container">
+      <SectionHeading id="writing-heading" index={3}>Writing</SectionHeading>
+
+      <ul class="writing-list">
+        {posts.map((post) => (
+          <li class="writing-item">
+            <a class="writing-link" href={`/blog/${post.id}`}>
+              <time
+                class="writing-date"
+                datetime={post.data.publishDate.toISOString().slice(0, 10)}
+              >
+                {post.data.publishDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+              <span class="writing-title">{post.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a class="writing-more" href="/blog">All posts →</a>
+    </div>
+  </section>
+)}
+
+<style>
+  .writing-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+  }
+  .writing-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .writing-item {
+    border-top: 1px solid var(--line);
+  }
+  .writing-item:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .writing-link {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 0;
+    color: var(--fg);
+  }
+  .writing-link:hover .writing-title,
+  .writing-link:focus-visible .writing-title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .writing-link:focus-visible { outline: none; }
+  .writing-date {
+    flex-shrink: 0;
+    width: 7.5rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .writing-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .writing-more {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 2px solid var(--border);
+    padding: 10px 18px;
+    color: var(--fg);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .writing-more:hover, .writing-more:focus-visible {
+    background: var(--fg);
+    color: var(--bg);
+    outline: none;
+  }
+  @media (max-width: 480px) {
+    .writing-link { flex-direction: column; gap: 4px; }
+    .writing-date { width: auto; }
+  }
+  @media (min-width: 768px) {
+    .writing-section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+  }
+</style>

@@ -1,0 +1,54 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import TimelineEntry from "./TimelineEntry.astro";
+import type { TimelineItem } from "./TimelineEntry.astro";
+import timelineData from "../data/timeline.json";
+
+// Work + education only, newest-first. Ongoing ("present") floats to top.
+const sortKey = (i: TimelineItem) => (i.end === "present" ? "9999-99" : i.end || i.start);
+const items = (timelineData as TimelineItem[])
+  .filter((i) => i.type === "work" || i.type === "education")
+  .sort((a, b) => {
+    const ka = sortKey(a);
+    const kb = sortKey(b);
+    if (ka !== kb) return kb.localeCompare(ka);
+    return b.start.localeCompare(a.start);
+  });
+---
+
+<section id="experience" aria-labelledby="experience-heading" class="experience-section">
+  <div class="container">
+    <SectionHeading id="experience-heading" index={1}>Experience</SectionHeading>
+
+    <p class="experience-sub">Work &amp; education, most recent first.</p>
+
+    <ol class="timeline">
+      {items.map((item) => (
+        <TimelineEntry item={item} />
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .experience-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+  }
+  .experience-sub {
+    margin-bottom: 1.75rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  @media (min-width: 768px) {
+    .experience-section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+  }
+</style>

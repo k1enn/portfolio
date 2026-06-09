@@ -1,0 +1,92 @@
+---
+import { slugify } from "../utils/slugify";
+
+export interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  publishDate: Date;
+  tags?: string[];
+}
+
+const { slug, title, description, publishDate, tags = [] } = Astro.props;
+const dateLabel = publishDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+const isoDate = publishDate.toISOString().slice(0, 10);
+---
+
+<article class="post-card">
+  <a class="post-card-link" href={`/blog/${slug}`}>
+    <time class="post-date" datetime={isoDate}>{dateLabel}</time>
+    <h3 class="post-title">{title}</h3>
+    <p class="post-desc">{description}</p>
+  </a>
+  {tags.length > 0 && (
+    <ul class="post-tags">
+      {tags.map((tag) => (
+        <li><a class="post-tag" href={`/tags/${slugify(tag)}`}>{tag}</a></li>
+      ))}
+    </ul>
+  )}
+</article>
+
+<style>
+  .post-card {
+    border-top: 1px solid var(--line);
+    padding: 18px 0;
+  }
+  .post-card-link {
+    display: block;
+    color: var(--fg);
+  }
+  .post-card-link:hover .post-title,
+  .post-card-link:focus-visible .post-title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .post-card-link:focus-visible { outline: none; }
+  .post-date {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .post-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .post-desc {
+    margin-top: 6px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+  }
+  .post-tag {
+    display: inline-block;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+    padding: 3px 8px;
+  }
+  .post-tag:hover, .post-tag:focus-visible {
+    border-color: var(--fg);
+    color: var(--fg);
+    outline: none;
+  }
+</style>

@@ -1,21 +1,33 @@
 ---
+// Anchor links scroll to home sections (smooth-scroll via data-nav-jump).
 const NAV_LINKS = [
   { id: "home", label: "Home" },
+  { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "tech", label: "Tech" },
   { id: "contact", label: "Contact" },
+];
+
+// Route links navigate to real pages (no data-nav-jump).
+const ROUTE_LINKS = [
+  { href: "/blog", label: "Blog" },
 ];
 ---
 
 <nav class="navbar" aria-label="Primary">
   <div class="navbar-container">
-    <a href="#home" class="navbar-logo" aria-label="k1en home" data-nav-jump="home">k1en</a>
+    <a href="/#home" class="navbar-logo" aria-label="k1en home" data-nav-jump="home">k1en</a>
 
     <div class="nav-right">
       <ul id="primary-nav-menu" class="nav-menu">
         {NAV_LINKS.map((link) => (
           <li class="nav-item">
-            <a href={`#${link.id}`} class="nav-link" data-nav-jump={link.id}>{link.label}</a>
+            <a href={`/#${link.id}`} class="nav-link" data-nav-jump={link.id}>{link.label}</a>
+          </li>
+        ))}
+        {ROUTE_LINKS.map((link) => (
+          <li class="nav-item">
+            <a href={link.href} class="nav-link">{link.label}</a>
           </li>
         ))}
       </ul>

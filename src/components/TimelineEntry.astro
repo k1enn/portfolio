@@ -1,0 +1,239 @@
+---
+import { RiArrowRightUpLine } from "react-icons/ri";
+
+export interface TimelineItem {
+  type: "work" | "education" | "project";
+  title: string;
+  org?: string;
+  start: string;
+  end?: string;
+  description: string;
+  tags?: string[];
+  link?: string;
+  image?: string;
+}
+
+export interface Props {
+  item: TimelineItem;
+  hidden?: boolean;
+  railEnd?: boolean;
+}
+
+const { item, hidden = false, railEnd = false } = Astro.props;
+
+const TYPE_LABEL: Record<TimelineItem["type"], string> = {
+  work: "Work",
+  education: "Education",
+  project: "Project",
+};
+
+// "2024-09" -> "Sep 2024"; "present" -> "Present"
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+function fmt(value?: string): string {
+  if (!value) return "";
+  if (value === "present") return "Present";
+  const [y, m] = value.split("-");
+  const mi = Number(m) - 1;
+  return MONTHS[mi] ? `${MONTHS[mi]} ${y}` : y;
+}
+const dateLabel = item.end ? `${fmt(item.start)} – ${fmt(item.end)}` : fmt(item.start);
+const dateTimeAttr = item.end && item.end !== "present" ? item.end : item.start;
+
+// Responsive thumbnail (matches existing -400w/-800w variants) for project images.
+const img = item.image;
+const isVariant = !!img && img.startsWith("/images/") && img.endsWith(".webp");
+const base = isVariant ? img!.slice(0, -".webp".length) : "";
+const srcset = isVariant ? `${base}-400w.webp 400w, ${base}-800w.webp 800w, ${img} 1280w` : undefined;
+const sizes = srcset ? "(max-width: 480px) 220px, 150px" : undefined;
+const displaySrc = isVariant ? `${base}-400w.webp` : img;
+---
+
+<li
+  class="tl-entry"
+  data-type={item.type}
+  data-tl-hidden={hidden ? "true" : undefined}
+  data-tl-rail-end={railEnd ? "" : undefined}
+>
+  <div class="tl-marker" aria-hidden="true">
+    <span class="tl-dot"></span>
+  </div>
+
+  <div class="tl-content">
+    <div class="tl-meta">
+      <span class="tl-badge">{TYPE_LABEL[item.type]}</span>
+      <time class="tl-date" datetime={dateTimeAttr}>{dateLabel}</time>
+    </div>
+
+    <h3 class="tl-title">
+      {item.link ? (
+        <a class="tl-link" href={item.link} target="_blank" rel="noopener noreferrer" aria-label={`${item.title} (opens in new tab)`}>
+          <span>{item.title}</span>
+          <span class="tl-arrow" aria-hidden="true"><RiArrowRightUpLine size={18} /></span>
+        </a>
+      ) : (
+        item.title
+      )}
+    </h3>
+
+    {item.org && <p class="tl-org">{item.org}</p>}
+
+    <div class="tl-body">
+      {displaySrc && (
+        <div class="tl-thumb-wrap">
+          <img
+            class="tl-thumb"
+            src={displaySrc}
+            srcset={srcset}
+            sizes={sizes}
+            alt={`${item.title} preview`}
+            loading="lazy"
+            decoding="async"
+            width="400"
+            height="225"
+          />
+        </div>
+      )}
+
+      <div class="tl-text">
+        <p class="tl-desc">{item.description}</p>
+
+        {item.tags && item.tags.length > 0 && (
+          <ul class="tl-tags">
+            {item.tags.map((tag) => (
+              <li class="tl-tag">{tag}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  </div>
+</li>
+
+<style>
+  .tl-entry {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 16px;
+    padding-bottom: 32px;
+  }
+  /* Continuous vertical rail behind the dots. */
+  .tl-marker {
+    position: relative;
+  }
+  .tl-marker::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 7px;
+    height: 100%;
+    width: 2px;
+    background: var(--line);
+  }
+  .tl-entry:last-child .tl-marker::before { height: 7px; }
+  /* Collapsed state: the last visible entry trims its rail to the dot. */
+  .tl-entry[data-tl-rail-end] .tl-marker::before { height: 7px; }
+  .tl-entry[data-tl-hidden] { display: none; }
+  .tl-dot {
+    position: absolute;
+    left: 2px;
+    top: 0;
+    width: 14px;
+    height: 14px;
+    background: var(--bg);
+    border: 2px solid var(--fg);
+  }
+  .tl-entry[data-type="work"] .tl-dot { background: var(--fg); }
+
+  .tl-content { min-width: 0; }
+  .tl-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .tl-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 2px solid var(--border);
+    padding: 2px 8px;
+    color: var(--fg);
+  }
+  .tl-date {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .tl-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    word-break: break-word;
+  }
+  .tl-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--fg);
+  }
+  .tl-link:hover, .tl-link:focus-visible { text-decoration: underline; outline: none; }
+  .tl-arrow { display: inline-flex; flex-shrink: 0; color: var(--muted); }
+  .tl-link:hover .tl-arrow, .tl-link:focus-visible .tl-arrow { color: var(--fg); }
+
+  .tl-org {
+    margin-top: 4px;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  /* Media row: small thumbnail (projects) sits left of the text. */
+  .tl-body {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-top: 12px;
+  }
+  .tl-text { flex: 1; min-width: 0; }
+  .tl-thumb-wrap {
+    flex: 0 0 150px;
+    width: 150px;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 2px solid var(--border);
+    background: var(--surface);
+  }
+  .tl-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .tl-desc {
+    margin-top: 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .tl-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+  }
+  @media (max-width: 480px) {
+    .tl-body { flex-direction: column; }
+    .tl-thumb-wrap { flex-basis: auto; width: 100%; max-width: 220px; }
+  }
+  .tl-tag {
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+    padding: 3px 8px;
+  }
+</style>

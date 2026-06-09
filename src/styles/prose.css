@@ -1,0 +1,76 @@
+/* Long-form article styling for blog post bodies. Palette-frozen; code uses --font-code. */
+.prose {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--fg);
+}
+.prose > * + * { margin-top: 1.1rem; }
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-top: 2.2rem;
+}
+.prose h2 { font-size: 1.6rem; }
+.prose h3 { font-size: 1.3rem; }
+.prose h4 { font-size: 1.1rem; }
+
+.prose a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.prose a:hover { text-decoration-thickness: 2px; }
+
+.prose ul,
+.prose ol { padding-left: 1.4rem; }
+.prose li + li { margin-top: 0.4rem; }
+
+.prose blockquote {
+  border-left: 3px solid var(--fg);
+  padding: 0.2rem 0 0.2rem 1rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 2px solid var(--border);
+}
+
+.prose hr {
+  border: none;
+  border-top: 2px solid var(--line);
+  margin: 2rem 0;
+}
+
+/* Inline code — palette, not the dark panel. */
+.prose :not(pre) > code {
+  font-family: var(--font-code);
+  font-size: 0.88em;
+  background: var(--surface-hover);
+  border: 1px solid var(--line);
+  padding: 1px 6px;
+}
+
+/* Shiki code blocks — fixed dark panel, consistent in light/dark. */
+.prose pre {
+  font-family: var(--font-code);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  padding: 16px 18px;
+  overflow-x: auto;
+  border: 2px solid var(--border);
+}
+.prose pre code {
+  font-family: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+}
