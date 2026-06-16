@@ -1,0 +1,109 @@
+/* giscus monochrome — dark. Mirrors src/styles/global.css :root[data-theme="dark"]. */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+main {
+  /* syntax highlight (GitHub dark) — kept functional for code in comments */
+  --color-prettylights-syntax-comment: #8b949e;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-ignored-text: #c9d1d9;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+
+  /* buttons — monochrome, primary = inverted (fg bg / bg text) */
+  --color-btn-text: #e0e0e0;
+  --color-btn-bg: #1e1e1e;
+  --color-btn-border: rgba(224, 224, 224, 0.15);
+  --color-btn-shadow: 0 0 transparent;
+  --color-btn-inset-shadow: 0 0 transparent;
+  --color-btn-hover-bg: #2a2a2a;
+  --color-btn-hover-border: rgba(224, 224, 224, 0.3);
+  --color-btn-active-bg: #333333;
+  --color-btn-active-border: rgba(224, 224, 224, 0.3);
+  --color-btn-selected-bg: #2a2a2a;
+  --color-btn-primary-text: #0a0a0a;
+  --color-btn-primary-bg: #e0e0e0;
+  --color-btn-primary-border: rgba(224, 224, 224, 0.15);
+  --color-btn-primary-shadow: 0 0 transparent;
+  --color-btn-primary-inset-shadow: 0 0 transparent;
+  --color-btn-primary-hover-bg: #c2c2c2;
+  --color-btn-primary-hover-border: rgba(224, 224, 224, 0.15);
+  --color-btn-primary-selected-bg: #ffffff;
+  --color-btn-primary-selected-shadow: 0 0 transparent;
+  --color-btn-primary-disabled-text: rgba(10, 10, 10, 0.8);
+  --color-btn-primary-disabled-bg: #6b6b6b;
+  --color-btn-primary-disabled-border: rgba(224, 224, 224, 0.15);
+
+  --color-action-list-item-default-hover-bg: rgba(224, 224, 224, 0.08);
+  --color-segmented-control-bg: #0f0f0f;
+  --color-segmented-control-button-bg: #151515;
+  --color-segmented-control-button-selected-border: #a8a8a8;
+
+  /* text + surfaces */
+  --color-fg-default: #e0e0e0;
+  --color-fg-muted: #a8a8a8;
+  --color-fg-subtle: #8a8a8a;
+  --color-canvas-default: #151515;
+  --color-canvas-overlay: #151515;
+  --color-canvas-inset: #0a0a0a;
+  --color-canvas-subtle: #0f0f0f;
+  --color-border-default: #2a2a2a;
+  --color-border-muted: #2a2a2a;
+  --color-neutral-muted: rgba(168, 168, 168, 0.15);
+
+  /* accent — neutralised to fg so links/spinners read monochrome */
+  --color-accent-fg: #e0e0e0;
+  --color-accent-emphasis: #e0e0e0;
+  --color-accent-muted: rgba(224, 224, 224, 0.3);
+  --color-accent-subtle: #1e1e1e;
+
+  /* functional states (rare; left semantic for clarity) */
+  --color-success-fg: #3fb950;
+  --color-attention-fg: #d29922;
+  --color-attention-muted: rgba(187, 128, 9, 0.4);
+  --color-attention-subtle: rgba(187, 128, 9, 0.15);
+  --color-danger-fg: #f85149;
+  --color-danger-muted: rgba(248, 81, 73, 0.4);
+  --color-danger-subtle: rgba(248, 81, 73, 0.1);
+
+  --color-primer-shadow-inset: 0 0 transparent;
+  --color-scale-gray-1: #1e1e1e;
+  --color-scale-blue-1: #2a2a2a;
+  --color-social-reaction-bg-hover: var(--color-scale-gray-1);
+  --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-1);
+
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* sharp corners to echo the site (avatars/reactions stay round) */
+main .gsc-comment-box,
+main .gsc-comment > .gsc-comment-box-tabs,
+main .gsc-comment .gsc-comment-content,
+main textarea,
+main .btn {
+  border-radius: 0 !important;
+}

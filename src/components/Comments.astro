@@ -1,0 +1,82 @@
+---
+// giscus comment thread for blog posts.
+// Monochrome theme (public/giscus-{light,dark}.css) synced to the site's
+// tri-state toggle (:root[data-theme]) + OS preference. No GitHub blue.
+const REPO = "k1enn/portfolio";
+const REPO_ID = "R_kgDOSe9NGw";
+const CATEGORY = "General";
+const CATEGORY_ID = "DIC_kwDOSe9NG84C_PTw";
+const LIGHT = "https://k1en.me/giscus-light.css";
+const DARK = "https://k1en.me/giscus-dark.css";
+---
+
+<section class="comments measure" aria-label="Comments">
+  <h2 class="comments-heading">Comments</h2>
+  <div class="giscus"></div>
+</section>
+
+<script
+  is:inline
+  define:vars={{ REPO, REPO_ID, CATEGORY, CATEGORY_ID, LIGHT, DARK }}
+>
+  (function () {
+    // Effective theme = explicit toggle value, else OS preference.
+    const effective = () => {
+      const t = document.documentElement.dataset.theme;
+      if (t === "light") return LIGHT;
+      if (t === "dark") return DARK;
+      return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+    };
+
+    // Inject giscus with the correct theme already set (no flash).
+    const s = document.createElement("script");
+    s.src = "https://giscus.app/client.js";
+    s.async = true;
+    s.crossOrigin = "anonymous";
+    const attrs = {
+      "data-repo": REPO,
+      "data-repo-id": REPO_ID,
+      "data-category": CATEGORY,
+      "data-category-id": CATEGORY_ID,
+      "data-mapping": "pathname",
+      "data-strict": "0",
+      "data-reactions-enabled": "1",
+      "data-emit-metadata": "0",
+      "data-input-position": "top",
+      "data-theme": effective(),
+      "data-lang": "en",
+      "data-loading": "lazy",
+    };
+    for (const [k, v] of Object.entries(attrs)) s.setAttribute(k, v);
+    document.querySelector(".giscus").appendChild(s);
+
+    // Re-theme the live iframe whenever the site theme changes.
+    const post = () => {
+      const frame = document.querySelector("iframe.giscus-frame");
+      if (!frame) return;
+      frame.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: effective() } } },
+        "https://giscus.app"
+      );
+    };
+    new MutationObserver(post).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+    matchMedia("(prefers-color-scheme: dark)").addEventListener("change", post);
+  })();
+</script>
+
+<style>
+  .comments {
+    margin-top: clamp(3rem, 8vw, 5rem);
+    padding-top: 2rem;
+    border-top: 2px solid var(--border);
+  }
+  .comments-heading {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+</style>
