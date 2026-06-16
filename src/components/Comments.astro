@@ -6,8 +6,6 @@ const REPO = "k1enn/portfolio";
 const REPO_ID = "R_kgDOSe9NGw";
 const CATEGORY = "General";
 const CATEGORY_ID = "DIC_kwDOSe9NG84C_PTw";
-const LIGHT = "https://k1en.me/giscus-light.css";
-const DARK = "https://k1en.me/giscus-dark.css";
 ---
 
 <section class="comments measure" aria-label="Comments">
@@ -17,9 +15,13 @@ const DARK = "https://k1en.me/giscus-dark.css";
 
 <script
   is:inline
-  define:vars={{ REPO, REPO_ID, CATEGORY, CATEGORY_ID, LIGHT, DARK }}
+  define:vars={{ REPO, REPO_ID, CATEGORY, CATEGORY_ID }}
 >
   (function () {
+    // Theme CSS served from the current host (localhost in dev, k1en.me in prod).
+    const LIGHT = location.origin + "/giscus-light.css";
+    const DARK = location.origin + "/giscus-dark.css";
+
     // Effective theme = explicit toggle value, else OS preference.
     const effective = () => {
       const t = document.documentElement.dataset.theme;
@@ -70,8 +72,12 @@ const DARK = "https://k1en.me/giscus-dark.css";
 <style>
   .comments {
     margin-top: clamp(3rem, 8vw, 5rem);
-    padding-top: 2rem;
-    border-top: 2px solid var(--border);
+    padding-bottom: clamp(3rem, 8vw, 5rem);
+  }
+  /* giscus injects the iframe at runtime — kill its default UA border */
+  .comments :global(.giscus),
+  .comments :global(iframe.giscus-frame) {
+    border: none !important;
   }
   .comments-heading {
     font-family: var(--font-display);
