@@ -1,6 +1,7 @@
 ---
 import Layout from "./Layout.astro";
 import Navbar from "../components/Navbar.astro";
+import Comments from "../components/Comments.astro";
 import { slugify } from "../utils/slugify";
 import "../styles/prose.css";
 
@@ -44,6 +45,8 @@ const iso = (d: Date) => d.toISOString().slice(0, 10);
         <slot />
       </div>
     </article>
+
+    <Comments />
   </main>
 </Layout>
 
