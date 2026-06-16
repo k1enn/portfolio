@@ -7,7 +7,8 @@ const WIDTHS = [400, 800, 1280];
 const QUALITY = 78;
 
 const files = await readdir(DIR);
-const pngs = files.filter((f) => f.toLowerCase().endsWith(".png"));
+const SOURCE_EXT = [".png", ".jpg", ".jpeg"];
+const pngs = files.filter((f) => SOURCE_EXT.some((ext) => f.toLowerCase().endsWith(ext)));
 
 let totalBefore = 0;
 let totalAfter = 0;
