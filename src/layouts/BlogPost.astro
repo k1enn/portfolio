@@ -11,16 +11,18 @@ export interface Props {
   publishDate: Date;
   updatedDate?: Date;
   tags?: string[];
+  // Absolute og:image URL from the post body, or null to omit it entirely.
+  image?: string | null;
 }
 
-const { title, description, publishDate, updatedDate, tags = [] } = Astro.props;
+const { title, description, publishDate, updatedDate, tags = [], image } = Astro.props;
 
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 const iso = (d: Date) => d.toISOString().slice(0, 10);
 ---
 
-<Layout title={`${title} — Trung Kien`} description={description}>
+<Layout title={`${title} — Trung Kien`} description={description} image={image}>
   <Navbar />
   <main>
     <article class="post measure">
