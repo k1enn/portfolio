@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
+import { pickRandomPostImage } from "../../utils/extract-post-image";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) =>
@@ -14,6 +15,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const ogImage = pickRandomPostImage(post.body ?? "");
 ---
 
 <BlogPost
@@ -22,6 +24,7 @@ const { Content } = await render(post);
   publishDate={post.data.publishDate}
   updatedDate={post.data.updatedDate}
   tags={post.data.tags}
+  image={ogImage}
 >
   <Content />
 </BlogPost>

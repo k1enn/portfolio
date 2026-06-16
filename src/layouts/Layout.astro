@@ -5,7 +5,8 @@ import "../styles/navbar.css";
 export interface Props {
   title?: string;
   description?: string;
-  image?: string;
+  // Absolute og:image URL. Defaults to the site image; pass null to omit it.
+  image?: string | null;
   keywords?: string;
 }
 
@@ -28,7 +29,7 @@ const personSchema = {
   "givenName": "Trung Kien",
   "familyName": "Dinh",
   "url": SITE_URL,
-  "image": image,
+  ...(image ? { "image": image } : {}),
   "jobTitle": "Full-Stack Developer",
   "description": "Full-stack developer from Vietnam building web and server-side systems with Next.js, React, Node.js, NestJS, Java, .NET, and Flutter. Open to hire.",
   "nationality": { "@type": "Country", "name": "Vietnam" },
@@ -139,18 +140,18 @@ const profilePageSchema = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={image} />
-    <meta property="og:image:alt" content="Trung Kien — Full-Stack Developer Portfolio" />
+    {image && <meta property="og:image" content={image} />}
+    {image && <meta property="og:image:alt" content="Trung Kien — Full-Stack Developer Portfolio" />}
     <meta property="og:locale" content="en_US" />
     <meta property="profile:first_name" content="Trung Kien" />
     <meta property="profile:last_name" content="Dinh" />
     <meta property="profile:username" content="k1enn" />
 
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
-    <meta name="twitter:image:alt" content="Trung Kien — Full-Stack Developer Portfolio" />
+    {image && <meta name="twitter:image" content={image} />}
+    {image && <meta name="twitter:image:alt" content="Trung Kien — Full-Stack Developer Portfolio" />}
 
     <link rel="apple-touch-icon" href="/favicon.ico" />
     <link rel="manifest" href="/manifest.json" />
