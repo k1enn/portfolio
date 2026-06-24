@@ -40,7 +40,7 @@ I fall in that mistake too, first i tryna connect all 3 to make it into one but 
 
 ## Defeating Laptop Power Management
 
-Laptop có 1 vấn đề là màn hình, khi gập lid nó thì nó sẽ suspend. Nên tôi cần tắt nó đi, khá cơ bản vào `/etc/systemd/logind.conf` sau đó thêm cái dòng
+Laptops have this one problem: the screen. When you close the lid it suspends. So i need to turn that off, pretty basic, go into `/etc/systemd/logind.conf` then add these lines
 
 ```
 HandleLidSwitch=ignore
@@ -48,15 +48,15 @@ HandleLidSwitchExternalPower=ignore
 HandleLidSwitchDocked=ignore
 ```
 
-Rồi update nó lại là xong. 
+Then just update it and you're done.
 
-Đối với phần tắt màn thì đây là approach tôi chọn do LLM đề xuất:
-Trong `/etc/default/grub`: 
+For turning off the screen, this is the approach i went with (suggested by an LLM):
+In `/etc/default/grub`: 
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet consoleblank=60 console=tty0 console=ttyS0,115200 "
 ```
 
-Sẽ có 2 thứ cần chú ý `consoleblank=60` sẽ tắt màn sau 60 giây khi không tác động và `console=tty0 console=ttyS0,115200` để tôi dùng Xterm.js cho copy paste trên terminal tiện hơn là NoVNC mặc định
+There are 2 things to note here. `consoleblank=60` turns off the screen after 60 seconds of no activity, and `console=tty0 console=ttyS0,115200` lets me use Xterm.js for copy paste on the terminal, which is way more convenient than the default NoVNC
 
 ## One Laptop Failed to Update Time
 
@@ -164,11 +164,11 @@ Laptops lack the 10Gbps networking required for enterprise distributed storage l
 
 ## Claude Code 
 
-Tạo 1 VM với OS là Ubuntu Server, cho khoảng 8gb ram
+Create a VM with Ubuntu Server as the OS, give it around 8gb of ram.
 
-PC của tôi xử dụng Intel(R) Xeon(R) CPU E5-2686 v4. Tôi chia trước mắt là 8 nhân để thử nghiệm xem có vấn đề gì với CPU khi khoảng 3 user sử dụng claude code trên cùng VM không
+My PC uses an Intel(R) Xeon(R) CPU E5-2686 v4. For now i allocated 8 cores to test whether there's any CPU issue when around 3 users run claude code on the same VM.
 
-Sau đó tôi cài đặt Tailscale trên VM này để ssh vào. Căn bản là sử dụng khá 
+After that i installed Tailscale on this VM to ssh into it. Basically it's pretty easy to use.
 
 ---
 
@@ -199,11 +199,11 @@ sudo tailscale set --accept-routes=false --accept-dns=false
 Simply it remove the DNS. Then it works
 
 ## Summary
-Tôi rất cảm ơn những giảng viên trước đó đã nghiêm khắc với tôi trong việc học mạng máy tính. Nếu không thì blog này sẽ không bao giờ có thể hoàn thành
-Shout out cho anh Sơn vì đã đưa cho tôi idea ban đầu về các nối các "nodes" lại với nhau thông qua chia IP và Subnet cơ bản.
+I'm really grateful to my past instructors who were strict with me when i was learning computer networking. Without them this blog would never have happened.
+Shout out to Sơn for giving me the initial idea of connecting the "nodes" together through basic IP and Subnet splitting.
 
-Những gì tôi học được hôm nay có thể là một phần nhỏ kiến thức của các bạn, nhưng hành trình và trải nghiệm là một thứ tôi không thể nào quên. Homelab vừa là một thú vui nhưng cũng là công việc thực tế, nó giúp tôi giữ lửa nghề và thay thế các nghiệp vụ trong phát triển website đã quá nhàm chán, truyền thống, cổ điển bằng một thứ liên quan tới hạ tầng.
+What i learned today might be a tiny slice of knowledge for you, but the journey and the experience are something i'll never forget. A homelab is both a hobby and real work, it keeps my passion for the craft alive and replaces the boring, traditional, classic routine of website development with something tied to infrastructure.
 
-Khi bạn kiểm soát được gần như là từ đầu đến cuối của một thứ gì đó có thể tinkering, nó mở ra vô vàn cơ hội để bạn có thể thực hiện nhiều dự án khác nhau, học hỏi các khía cạnh còn thiếu trong SWE (Software Engineering) mà hiếm có trường lớp nào có thể dạy được.
+When you control almost the whole thing end to end, something you can actually tinker with, it opens up endless opportunities to do all kinds of projects and learn the missing pieces of SWE (Software Engineering) that few schools ever teach.
 
-Cảm ơn mọi người đã đi đến đây, chúc mọi người thành công trong công việc.
+Thanks everyone for making it this far, wishing you all success in your work.
