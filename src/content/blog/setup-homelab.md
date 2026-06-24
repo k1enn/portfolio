@@ -6,8 +6,6 @@ tags: ["Proxmox", "Computer Networking"]
 draft: false
 ---
 
-# How i set up my homelab with 3 nodes
-
 Hello, it just my simple blog writing about how i get started doing my best about homelab.
 
 ---
