@@ -22,7 +22,9 @@ Building a cluster with three nodes is actually the "magic number" for Proxmox H
 The cluster uses Corosync for synchronization, which requires incredibly stable, low-latency communication. All three nodes are hardwired to an unmanaged gigabit switch via Ethernet cables, we would never use Wi-Fi here.
 
 <img
-  src="/images/topology.png"
+  src="/images/topology.webp"
+  srcset="/images/topology-400w.webp 400w, /images/topology-800w.webp 800w, /images/topology.webp 1280w"
+  sizes="(max-width: 680px) 100vw, 680px"
   alt="Topology Diagram"
   loading="lazy"
   decoding="async"
