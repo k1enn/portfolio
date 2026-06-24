@@ -30,15 +30,6 @@ The cluster uses Corosync for synchronization, which requires incredibly stable,
   decoding="async"
 />
 
-<img
-  src="/images/topology.webp"
-  srcset="/images/topology-400w.webp 400w, /images/topology-800w.webp 800w, /images/topology.webp 1280w"
-  sizes="(max-width: 680px) 100vw, 680px"
-  alt="Topology Diagram"
-  loading="lazy"
-  decoding="async"
-/>
-
 ## Busting the "Supercomputer" Myth
 
 It is a common misconception that clustering machines fuses their CPUs and RAM into one giant resource pool. Instead of sharing hardware microscopically, the Proxmox cluster shares workloads, management (a single web dashboard), and failover resilience.
