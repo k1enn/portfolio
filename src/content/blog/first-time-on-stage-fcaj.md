@@ -1,7 +1,7 @@
 ---
 title: "First time on AWS Community Day"
 description: "Journaling about my first time - ask a speaker on AWS Community Day"
-publishDate: 2026-06-08
+publishDate: 2026-05-09
 tags: ["AWS", "FCAJ"]
 draft: false
 ---
