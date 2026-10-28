@@ -2,7 +2,7 @@
 title: "How i set up my homelab with 3 nodes"
 description: "Doing my homelab with 3 nodes, using Proxmox and other services"
 publishDate: 2026-06-25
-tags: ["Proxmox", "Computer Networking"]
+tags: ["Proxmox", "Computer Networking", "Homelab"]
 draft: false
 ---
 
